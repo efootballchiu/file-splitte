@@ -9,42 +9,32 @@
 <meta name="theme-color" content="#0f1115">
 <title>檔案切割器</title>
 <style>
-  :root {
-    --bg: #0f1115;
-    --panel: #181c24;
-    --panel-2: #1f2530;
-    --border: #2a3140;
-    --text: #e8ecf3;
-    --muted: #8a93a6;
-    --accent: #ffb84d;
-    --accent-2: #ff7849;
-    --green: #4ade80;
-    --red: #f87171;
-    --shadow: 0 8px 24px rgba(0,0,0,.35);
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body {
-    margin: 0; padding: 0; min-height: 100vh;
-    background: radial-gradient(ellipse at top, #1c2230 0%, var(--bg) 60%);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Helvetica Neue", sans-serif;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-  }
-  body {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-             env(safe-area-inset-bottom) env(safe-area-inset-left);
-  }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 16px 16px 80px; }
-  header { padding: 12px 4px 20px; }
-  h1 {
-    font-size: 26px; margin: 0 0 4px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  header p { color: var(--muted); margin: 0; font-size: 14px; }
+:root {
+  --bg: #0f1115; --panel: #181c24; --panel-2: #1f2530;
+  --border: #2a3140; --text: #e8ecf3; --muted: #8a93a6;
+  --accent: #ffb84d; --accent-2: #ff7849;
+  --green: #4ade80; --red: #f87171;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0; min-height: 100vh;
+  background: radial-gradient(ellipse at top, #1c2230 0%, var(--bg) 60%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Helvetica Neue", sans-serif;
+  font-size: 16px; -webkit-font-smoothing: antialiased;
+}
+body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 16px 16px 80px; }
+header { padding: 12px 4px 20px; }
+h1 {
+  font-size: 28px; margin: 0 0 6px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.5; }
 
 .tabs {
 display: flex; gap: 4px; margin-bottom: 16px;
@@ -52,177 +42,150 @@ background: var(–panel); border-radius: 12px; padding: 4px;
 border: 1px solid var(–border);
 }
 .tab {
-flex: 1; padding: 10px; border: 0; background: transparent;
+flex: 1; padding: 11px; border: 0; background: transparent;
 color: var(–muted); font-size: 15px; font-weight: 600;
 border-radius: 8px; cursor: pointer; font-family: inherit;
-transition: all .15s ease;
+appearance: none; -webkit-appearance: none;
 }
-.tab.active {
-background: var(–panel-2); color: var(–text);
-box-shadow: inset 0 0 0 1px var(–border);
-}
+.tab.active { background: var(–panel-2); color: var(–text); }
 
 .panel {
 background: var(–panel); border: 1px solid var(–border);
 border-radius: 14px; padding: 16px; margin-bottom: 14px;
-box-shadow: var(–shadow);
 }
 .panel h2 {
-font-size: 14px; text-transform: uppercase; letter-spacing: .08em;
-color: var(–muted); margin: 0 0 12px;
+font-size: 12px; text-transform: uppercase; letter-spacing: .1em;
+color: var(–muted); margin: 0 0 12px; font-weight: 700;
 }
 
-.drop {
-border: 2px dashed var(–border); border-radius: 14px;
-padding: 28px 16px; text-align: center; cursor: pointer;
-transition: all .15s ease;
-width: 100%; display: block; box-sizing: border-box;
-font-family: inherit; font-size: inherit;
-appearance: none; -webkit-appearance: none;
--webkit-tap-highlight-color: transparent;
+.file-picker {
+display: block; border: 2px dashed var(–border); border-radius: 12px;
+padding: 24px 16px; text-align: center; background: var(–panel-2);
+margin-bottom: 12px;
 }
-button.drop {
-background: var(–panel-2) !important;
-color: var(–text) !important;
+.file-picker .icon { font-size: 36px; line-height: 1; margin-bottom: 8px; }
+.file-picker .lbl { font-size: 16px; font-weight: 600; color: var(–text); margin-bottom: 6px; }
+.file-picker .sub { font-size: 12px; color: var(–muted); margin-bottom: 14px; }
+.file-picker input[type=“file”] {
+display: block; width: 100%; max-width: 320px; margin: 0 auto;
+font-size: 14px; color: var(–text);
 }
-button.drop:active { background: rgba(255,184,77,.08) !important; }
-button.drop .big { color: var(–text); }
-button.drop .sub { color: var(–muted); }
-.drop.hover { border-color: var(–accent); background: rgba(255,184,77,.06); }
-.drop .icon { font-size: 36px; margin-bottom: 8px; }
-.drop .big { font-size: 17px; font-weight: 600; }
-.drop .sub { color: var(–muted); font-size: 13px; margin-top: 4px; }
-
-.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.row label { color: var(–muted); font-size: 14px; min-width: 100px; }
-
-input[type=“number”] {
-background: var(–panel-2); color: var(–text);
-border: 1px solid var(–border); border-radius: 8px;
-padding: 8px 10px; font-size: 16px; width: 110px;
-font-family: inherit;
-}
-input[type=“number”]:focus { outline: 2px solid var(–accent); outline-offset: -1px; }
-
-.toggle {
-display: flex; align-items: center; gap: 10px;
-padding: 8px 0; cursor: pointer; user-select: none;
-}
-.toggle input { appearance: none; width: 40px; height: 24px;
-background: var(–panel-2); border: 1px solid var(–border);
-border-radius: 999px; position: relative; cursor: pointer;
-transition: background .15s; flex-shrink: 0;
-}
-.toggle input:checked { background: var(–accent); border-color: var(–accent); }
-.toggle input::after {
-content: “”; position: absolute; top: 2px; left: 2px;
-width: 18px; height: 18px; border-radius: 50%;
-background: white; transition: transform .15s;
-}
-.toggle input:checked::after { transform: translateX(16px); }
-.toggle span { font-size: 14px; color: var(–text); }
-.toggle small { display: block; color: var(–muted); font-size: 12px; }
-
-button.primary {
+.file-picker input[type=“file”]::-webkit-file-upload-button {
 background: linear-gradient(135deg, var(–accent), var(–accent-2));
-color: #1a1410; border: 0; border-radius: 10px;
-padding: 14px 20px; font-size: 16px; font-weight: 700;
-cursor: pointer; width: 100%; font-family: inherit;
-box-shadow: 0 4px 12px rgba(255,120,73,.3);
-}
-button.primary:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
-button.primary:active { transform: translateY(1px); }
-button.ghost {
-background: var(–panel-2); color: var(–text);
-border: 1px solid var(–border); border-radius: 8px;
-padding: 8px 14px; font-size: 14px; cursor: pointer;
-font-family: inherit;
+color: #1a1410; border: 0; padding: 10px 18px; border-radius: 8px;
+font-weight: 700; cursor: pointer; font-family: inherit;
+font-size: 14px; margin-right: 10px;
 }
 
-.queue { display: flex; flex-direction: column; gap: 8px; }
-.queue:empty::before {
-content: “—  未有檔案”; color: var(–muted);
-font-size: 13px; font-style: italic;
-}
-.file {
+.queue { font-size: 13px; color: var(–muted); padding: 4px 0; }
+.queue-item {
 background: var(–panel-2); border: 1px solid var(–border);
-border-radius: 10px; padding: 10px 12px;
+border-radius: 8px; padding: 8px 12px; font-size: 13px;
+margin-top: 6px; display: flex; justify-content: space-between;
+align-items: center; gap: 8px;
 }
-.file .name {
-font-size: 14px; font-weight: 600;
-overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+.queue-item .qname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.queue-item .qsize { color: var(–muted); font-size: 12px; flex-shrink: 0; }
+
+.btn-primary {
+width: 100%; padding: 14px; font-size: 16px; font-weight: 700;
+background: linear-gradient(135deg, var(–accent), var(–accent-2));
+color: #1a1410; border: 0; border-radius: 8px;
+cursor: pointer; font-family: inherit;
+appearance: none; -webkit-appearance: none;
 }
-.file .meta {
-font-size: 12px; color: var(–muted); margin-top: 2px;
-display: flex; gap: 10px; flex-wrap: wrap;
+.btn-primary:disabled { opacity: 0.4; }
+
+.row-setting {
+display: flex; align-items: center; gap: 10px;
+padding: 8px 0; flex-wrap: wrap;
 }
-.file .bar {
-margin-top: 8px; height: 5px; background: var(–bg);
+.row-setting label { color: var(–text); font-size: 14px; }
+.row-setting input[type=“number”] {
+background: var(–panel-2); color: var(–text);
+border: 1px solid var(–border); border-radius: 6px;
+padding: 8px 10px; font-size: 16px; width: 90px;
+font-family: inherit;
+appearance: none; -webkit-appearance: none;
+}
+.row-setting .hint { color: var(–muted); font-size: 12px; }
+
+.toggle-row {
+display: flex; align-items: center; gap: 12px;
+padding: 10px 0; cursor: pointer;
+}
+.toggle-btn {
+flex-shrink: 0; width: 46px; height: 28px;
+border-radius: 999px; background: #3a4252;
+border: none; position: relative; cursor: pointer;
+appearance: none; -webkit-appearance: none;
+padding: 0; transition: background 0.15s;
+}
+.toggle-btn::after {
+content: “”; position: absolute; top: 3px; left: 3px;
+width: 22px; height: 22px; border-radius: 50%;
+background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+transition: transform 0.15s;
+}
+.toggle-btn.on { background: var(–accent); }
+.toggle-btn.on::after { transform: translateX(18px); }
+.toggle-text { flex: 1; }
+.toggle-text .t { font-size: 14px; color: var(–text); }
+.toggle-text .s { font-size: 12px; color: var(–muted); margin-top: 2px; }
+
+.progress-text { font-size: 13px; color: var(–text); margin-bottom: 6px; }
+.progress-bar {
+height: 8px; background: var(–panel-2);
 border-radius: 99px; overflow: hidden;
+border: 1px solid var(–border);
 }
-.file .fill {
+.progress-fill {
 height: 100%; width: 0;
 background: linear-gradient(90deg, var(–accent), var(–accent-2));
-transition: width .15s ease;
+transition: width 0.2s ease;
 }
-.file.done .fill { background: var(–green); }
-.file.error .fill { background: var(–red); }
-.badge {
-display: inline-block; padding: 1px 7px; border-radius: 99px;
-font-size: 11px; font-weight: 600;
+
+.result-item {
+background: var(–panel-2); border: 1px solid var(–border);
+border-radius: 10px; padding: 12px; margin-top: 8px;
 }
-.badge.queue { background: var(–panel); color: var(–muted); }
-.badge.work { background: rgba(255,184,77,.15); color: var(–accent); }
-.badge.done { background: rgba(74,222,128,.15); color: var(–green); }
-.badge.skip { background: rgba(138,147,166,.15); color: var(–muted); }
-.badge.error { background: rgba(248,113,113,.15); color: var(–red); }
+.result-item .rname { font-size: 14px; font-weight: 600; margin-bottom: 4px; word-break: break-all; }
+.result-item .rmeta { font-size: 12px; color: var(–muted); margin-bottom: 10px; }
+.result-item .rmeta.ok { color: var(–green); }
+.result-item .rmeta.err { color: var(–red); }
+.dl-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+.dl-btn {
+appearance: none; -webkit-appearance: none;
+background: var(–panel); color: var(–accent);
+border: 1px solid var(–border); padding: 8px 12px;
+border-radius: 6px; font-size: 12px;
+font-family: ui-monospace, “SF Mono”, Menlo, monospace;
+cursor: pointer;
+}
+.dl-btn.primary {
+background: linear-gradient(135deg, var(–accent), var(–accent-2));
+color: #1a1410; font-weight: 700; border-color: transparent;
+}
 
 .log {
 background: #0a0c10; border: 1px solid var(–border);
-border-radius: 10px; padding: 10px;
+border-radius: 8px; padding: 10px;
 font-family: ui-monospace, “SF Mono”, Menlo, monospace;
-font-size: 12px; color: var(–muted);
-max-height: 200px; overflow-y: auto;
-white-space: pre-wrap; word-break: break-all;
+font-size: 11px; color: var(–muted);
+max-height: 180px; overflow-y: auto;
+white-space: pre-wrap; word-break: break-all; line-height: 1.5;
 }
 .log .ok { color: var(–green); }
 .log .err { color: var(–red); }
-
-.results {
-background: var(–panel-2); border: 1px solid var(–border);
-border-radius: 10px; padding: 12px;
-}
-.results .summary { display: flex; gap: 16px; flex-wrap: wrap; }
-.results .stat strong { font-size: 22px; display: block; }
-.results .stat span { font-size: 12px; color: var(–muted); }
-
-.download-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
-.dl-group {
-background: var(–bg); border: 1px solid var(–border);
-border-radius: 8px; padding: 10px;
-}
-.dl-group .title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-.dl-group .links { display: flex; flex-wrap: wrap; gap: 6px; }
-.dl {
-display: inline-flex; align-items: center; gap: 4px;
-background: var(–panel); border: 1px solid var(–border);
-color: var(–accent); padding: 6px 10px; border-radius: 6px;
-font-size: 12px; text-decoration: none; cursor: pointer;
-font-family: ui-monospace, “SF Mono”, Menlo, monospace;
-appearance: none; -webkit-appearance: none;
-}
-button.dl { font-family: ui-monospace, “SF Mono”, Menlo, monospace; }
-.dl:active { background: var(–panel-2); }
-.dl.bulk { color: var(–text); font-weight: 600; }
-
 .hidden { display: none !important; }
 
-.hint {
-background: rgba(255,184,77,.08); border: 1px solid rgba(255,184,77,.25);
-border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.5;
-color: #ffd9a8; margin-bottom: 12px;
+.tip-box {
+background: rgba(255,184,77,0.08);
+border: 1px solid rgba(255,184,77,0.25);
+border-radius: 8px; padding: 10px 12px;
+font-size: 13px; color: #ffd9a8;
+line-height: 1.5; margin-bottom: 12px;
 }
-.hint strong { color: var(–accent); }
 </style>
 
 </head>
@@ -234,249 +197,121 @@ color: #ffd9a8; margin-bottom: 12px;
   <p>切大檔案做 &lt; 30 MB 嘅碎片，方便上傳去 AI 工具。100% 喺你部機本地處理。</p>
 </header>
 
-<div class="tabs" role="tablist">
-  <button class="tab active" data-tab="split" role="tab">切割</button>
-  <button class="tab" data-tab="merge" role="tab">合併</button>
+<div class="tabs">
+  <button class="tab active" data-tab="split">切割</button>
+  <button class="tab" data-tab="merge">合併</button>
 </div>
 
-<!-- ============== 切割 tab ============== -->
-
 <section id="tab-split">
-
-  <div class="panel">
-    <h2>1. 揀檔案</h2>
-    <button type="button" class="drop" id="dropZone">
-      <div class="icon">📁</div>
-      <div class="big">㩒呢度揀檔案</div>
-      <div class="sub">iPad / Mac 仲可以拖檔案入嚟</div>
-    </button>
-    <input type="file" id="fileInput" multiple style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-    <div class="row" style="margin-top:10px">
-      <button class="ghost" id="clearBtn">清空 queue</button>
-      <span class="sub" id="queueCount" style="color:var(--muted);font-size:13px"></span>
-    </div>
+<div class="panel">
+  <h2>1. 揀檔案</h2>
+  <div class="file-picker">
+    <div class="icon">📁</div>
+    <div class="lbl">揀大檔案嚟切</div>
+    <div class="sub">支援任何格式 · 多檔案揀</div>
+    <input type="file" id="splitFileInput" multiple>
   </div>
+  <div class="queue" id="splitQueue"></div>
+</div>
 
-  <div class="panel">
-    <h2>2. 設定</h2>
-    <div class="row" style="margin-bottom:8px">
-      <label>每片大細</label>
-      <input type="number" id="chunkSize" value="29.9" step="0.1" min="0.1" max="2048">
-      <span class="sub" style="color:var(--muted);font-size:13px">MB（預設 29.9 安全過 30 MB 上限）</span>
-    </div>
-    <label class="toggle">
-      <input type="checkbox" id="autoStart" checked>
-      <span>揀完自動開始<small>揀完檔案即刻切，唔使㩒 button</small></span>
-    </label>
-    <label class="toggle">
-      <input type="checkbox" id="copySmall" checked>
-      <span>細檔案都包埋落結果<small>細過 chunk size 嘅檔案直接 copy 到 .zip</small></span>
-    </label>
-    <label class="toggle">
-      <input type="checkbox" id="verifyHash" checked>
-      <span>計 SHA256 完整性<small>合併後可驗證，安心啲；超大檔案可關閉提速</small></span>
-    </label>
+<div class="panel">
+  <h2>2. 設定</h2>
+  <div class="row-setting">
+    <label>每片大細</label>
+    <input type="number" id="chunkMb" value="29.9" step="0.1" min="0.1" max="2048">
+    <span class="hint">MB · 預設 29.9 安全過 30 MB</span>
   </div>
+  <div class="toggle-row" id="toggle-auto">
+    <button type="button" class="toggle-btn on"></button>
+    <div class="toggle-text"><div class="t">揀完自動開始</div><div class="s">揀完即刻切，唔使㩒 button</div></div>
+  </div>
+  <div class="toggle-row" id="toggle-copy">
+    <button type="button" class="toggle-btn on"></button>
+    <div class="toggle-text"><div class="t">細檔案都包埋落結果</div><div class="s">細過 chunk size 嘅檔案直接 copy 到 zip</div></div>
+  </div>
+  <div class="toggle-row" id="toggle-hash">
+    <button type="button" class="toggle-btn on"></button>
+    <div class="toggle-text"><div class="t">計 SHA256 完整性</div><div class="s">合併後可驗證；超大檔案可關閉提速</div></div>
+  </div>
+</div>
 
-  <div class="panel">
-    <h2>3. 開始</h2>
-    <button class="primary" id="startBtn" disabled>開始切割</button>
-  </div>
+<div class="panel">
+  <button class="btn-primary" id="startBtn" disabled>▶  開始切割</button>
+</div>
 
-  <div class="panel">
-    <h2>進度</h2>
-    <div class="queue" id="queue"></div>
-  </div>
+<div class="panel hidden" id="progressPanel">
+  <h2>進度</h2>
+  <div class="progress-text" id="progressText">準備中...</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
 
-  <div class="panel hidden" id="resultPanel">
-    <h2>完成報告</h2>
-    <div class="results">
-      <div class="summary" id="summary"></div>
-      <div class="download-list" id="downloads"></div>
-    </div>
-  </div>
+<div class="panel hidden" id="resultPanel">
+  <h2>完成 — 點下面下載</h2>
+  <div id="results"></div>
+</div>
 
-  <div class="panel">
-    <h2>記錄</h2>
-    <div class="log" id="log">準備就緒。</div>
-  </div>
+<div class="panel">
+  <h2>記錄</h2>
+  <div class="log" id="splitLog">準備就緒。</div>
+</div>
 </section>
-
-<!-- ============== 合併 tab ============== -->
 
 <section id="tab-merge" class="hidden">
-  <div class="hint">
-    <strong>合併步驟：</strong><br>
-    一次過揀曬一個檔案嘅 <code>manifest.json</code> 同所有 <code>.partXXX</code>，
-    或者直接揀返原本嗰個 <code>.zip</code>，個 app 會自動偵測同砌返。
+<div class="tip-box">
+  <strong>合併步驟：</strong>揀返切割產生嘅 .zip，或者揀埋 manifest.json + 所有 .partXXX 檔案
+</div>
+<div class="panel">
+  <h2>揀返檔案</h2>
+  <div class="file-picker">
+    <div class="icon">🧩</div>
+    <div class="lbl">揀返切割產物</div>
+    <div class="sub">.zip / 或 manifest.json + .partXXX</div>
+    <input type="file" id="mergeFileInput" multiple>
   </div>
-
-  <div class="panel">
-    <h2>揀返切割產物</h2>
-    <button type="button" class="drop" id="mergeDropZone">
-      <div class="icon">🧩</div>
-      <div class="big">㩒呢度揀檔案</div>
-      <div class="sub">揀 .zip / 或者揀 manifest.json + 所有 .partXXX</div>
-    </button>
-    <input type="file" id="mergeFileInput" multiple style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-    <div class="row" style="margin-top:10px">
-      <button class="ghost" id="mergeClearBtn">清空</button>
-      <span class="sub" id="mergeCount" style="color:var(--muted);font-size:13px"></span>
-    </div>
-  </div>
-
-  <div class="panel">
-    <button class="primary" id="mergeBtn" disabled>開始合併</button>
-  </div>
-
-  <div class="panel">
-    <h2>進度</h2>
-    <div class="queue" id="mergeQueue"></div>
-  </div>
-
-  <div class="panel">
-    <h2>記錄</h2>
-    <div class="log" id="mergeLog">準備就緒。</div>
-  </div>
+  <div class="queue" id="mergeQueue"></div>
+</div>
+<div class="panel">
+  <button class="btn-primary" id="mergeBtn" disabled>▶  開始合併</button>
+</div>
+<div class="panel hidden" id="mergeResultPanel">
+  <h2>合併結果</h2>
+  <div id="mergeResults"></div>
+</div>
+<div class="panel">
+  <h2>記錄</h2>
+  <div class="log" id="mergeLog">準備就緒。</div>
+</div>
 </section>
-
 </div>
 
 <script>
-/* =========================================================================
-   檔案切割器  —  純 JavaScript，streaming 處理，全部運算喺你部機本地進行
-   ========================================================================= */
-
 "use strict";
-
-/* ----- iOS-friendly download helper -----
-   iOS Firefox/Safari 對 <a download> 唔可靠，要多重 fallback */
-window.__iosDownload = function(blob, filename) {
-  console.log('[download] start', filename, 'size=', blob.size);
-  
-  /* Fallback 1: 用 navigator.share 如果可用（最 iOS-native） */
-  if (navigator.share && navigator.canShare) {
-    try {
-      const file = new File([blob], filename, { type: blob.type || 'application/octet-stream' });
-      if (navigator.canShare({ files: [file] })) {
-        return navigator.share({ files: [file], title: filename }).catch(e => {
-          console.log('share cancelled or failed:', e);
-          /* fall through to next method */
-          window.__fallbackDownload(blob, filename);
-        });
-      }
-    } catch (e) {
-      console.log('share API failed:', e);
-    }
-  }
-  window.__fallbackDownload(blob, filename);
-};
-
-window.__fallbackDownload = function(blob, filename) {
-  /* 嘗試標準 anchor click */
-  try {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, 1000);
-    return;
-  } catch (e) {
-    console.log('anchor download failed:', e);
-  }
-  
-  /* 最終 fallback：開個新 tab 顯示個檔案 */
-  try {
-    const url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
-  } catch (e) {
-    alert('下載失敗：' + e.message);
-  }
-};
-
-
-const VERSION = "1.0.0";
-const MANIFEST_NAME = "manifest.json";
-const READ_BUF = 1024 * 1024;   // 1 MiB
-
-/* ---------- DOM helpers ---------- */
-const $ = (id) => document.getElementById(id);
-function fmtSize(n) {
-  if (n === 0) return "0 B";
-  const u = ["B","KB","MB","GB","TB"]; let i = 0; let v = n;
-  while (v >= 1024 && i < u.length - 1) { v /= 1024; i++; }
-  return v.toFixed(i === 0 ? 0 : 2) + " " + u[i];
-}
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  })[c]);
-}
-function sanitizeFolder(name) {
-  return name.replace(/[<>:"/\\|?*\x00]/g, "_").replace(/^[\s.]+|[\s.]+$/g, "") || "file";
-}
-function logTo(el, msg, cls) {
-  const span = document.createElement("span");
-  if (cls) span.className = cls;
-  span.textContent = msg;
-  el.appendChild(span);
-  el.appendChild(document.createTextNode("\n"));
-  el.scrollTop = el.scrollHeight;
-}
-
-/* ---------- SHA-256 streaming via WebCrypto incremental fallback ----------
-   WebCrypto 嘅 subtle.digest 唔支援 streaming，所以對好大嘅檔案，我哋用
-   純 JS 嘅 SHA-256 增量計算（速度約 50-100 MB/s，夠快）。 */
 class SHA256 {
   constructor() {
-    this.h = new Uint32Array([
-      0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,
-      0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19
-    ]);
-    this.k = new Uint32Array([
-      0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
-      0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
-      0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
-      0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
-      0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
-      0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
-      0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
-      0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
-    ]);
-    this.buf = new Uint8Array(64);
-    this.bufLen = 0;
-    this.totalLen = 0n;
+    this.h = new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]);
+    this.k = new Uint32Array([0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2]);
+    this.buf = new Uint8Array(64); this.bufLen = 0; this.totalLen = 0n;
   }
   _block(p, off) {
     const w = new Uint32Array(64);
-    for (let i = 0; i < 16; i++) {
-      w[i] = (p[off+4*i]<<24) | (p[off+4*i+1]<<16) | (p[off+4*i+2]<<8) | p[off+4*i+3];
-    }
+    for (let i = 0; i < 16; i++) w[i] = (p[off+4*i]<<24)|(p[off+4*i+1]<<16)|(p[off+4*i+2]<<8)|p[off+4*i+3];
     for (let i = 16; i < 64; i++) {
-      const s0 = ((w[i-15]>>>7)|(w[i-15]<<25)) ^ ((w[i-15]>>>18)|(w[i-15]<<14)) ^ (w[i-15]>>>3);
-      const s1 = ((w[i-2]>>>17)|(w[i-2]<<15)) ^ ((w[i-2]>>>19)|(w[i-2]<<13)) ^ (w[i-2]>>>10);
+      const s0 = ((w[i-15]>>>7)|(w[i-15]<<25))^((w[i-15]>>>18)|(w[i-15]<<14))^(w[i-15]>>>3);
+      const s1 = ((w[i-2]>>>17)|(w[i-2]<<15))^((w[i-2]>>>19)|(w[i-2]<<13))^(w[i-2]>>>10);
       w[i] = (w[i-16] + s0 + w[i-7] + s1) | 0;
     }
     let a=this.h[0],b=this.h[1],c=this.h[2],d=this.h[3],e=this.h[4],f=this.h[5],g=this.h[6],h=this.h[7];
     for (let i = 0; i < 64; i++) {
-      const S1 = ((e>>>6)|(e<<26)) ^ ((e>>>11)|(e<<21)) ^ ((e>>>25)|(e<<7));
+      const S1 = ((e>>>6)|(e<<26))^((e>>>11)|(e<<21))^((e>>>25)|(e<<7));
       const ch = (e & f) ^ ((~e) & g);
       const t1 = (h + S1 + ch + this.k[i] + w[i]) | 0;
-      const S0 = ((a>>>2)|(a<<30)) ^ ((a>>>13)|(a<<19)) ^ ((a>>>22)|(a<<10));
+      const S0 = ((a>>>2)|(a<<30))^((a>>>13)|(a<<19))^((a>>>22)|(a<<10));
       const mj = (a & b) ^ (a & c) ^ (b & c);
       const t2 = (S0 + mj) | 0;
       h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b; b=a; a=(t1+t2)|0;
     }
-    this.h[0]=(this.h[0]+a)|0; this.h[1]=(this.h[1]+b)|0;
-    this.h[2]=(this.h[2]+c)|0; this.h[3]=(this.h[3]+d)|0;
-    this.h[4]=(this.h[4]+e)|0; this.h[5]=(this.h[5]+f)|0;
-    this.h[6]=(this.h[6]+g)|0; this.h[7]=(this.h[7]+h)|0;
+    this.h[0]=(this.h[0]+a)|0; this.h[1]=(this.h[1]+b)|0; this.h[2]=(this.h[2]+c)|0; this.h[3]=(this.h[3]+d)|0;
+    this.h[4]=(this.h[4]+e)|0; this.h[5]=(this.h[5]+f)|0; this.h[6]=(this.h[6]+g)|0; this.h[7]=(this.h[7]+h)|0;
   }
   update(data) {
     if (!(data instanceof Uint8Array)) data = new Uint8Array(data);
@@ -484,560 +319,403 @@ class SHA256 {
     let off = 0;
     if (this.bufLen > 0) {
       const need = 64 - this.bufLen;
-      if (data.length < need) {
-        this.buf.set(data, this.bufLen); this.bufLen += data.length; return;
-      }
+      if (data.length < need) { this.buf.set(data, this.bufLen); this.bufLen += data.length; return; }
       this.buf.set(data.subarray(0, need), this.bufLen);
-      this._block(this.buf, 0);
-      this.bufLen = 0;
-      off = need;
+      this._block(this.buf, 0); this.bufLen = 0; off = need;
     }
-    while (off + 64 <= data.length) {
-      this._block(data, off);
-      off += 64;
-    }
+    while (off + 64 <= data.length) { this._block(data, off); off += 64; }
     const rem = data.length - off;
-    if (rem > 0) {
-      this.buf.set(data.subarray(off), 0);
-      this.bufLen = rem;
-    }
+    if (rem > 0) { this.buf.set(data.subarray(off), 0); this.bufLen = rem; }
   }
   digestHex() {
     const bitLen = this.totalLen * 8n;
     const padLen = (this.bufLen < 56) ? (56 - this.bufLen) : (120 - this.bufLen);
     const tail = new Uint8Array(padLen + 8);
     tail[0] = 0x80;
-    const view = new DataView(tail.buffer);
-    view.setBigUint64(padLen, bitLen, false);
+    new DataView(tail.buffer).setBigUint64(padLen, bitLen, false);
     this.update(tail);
     let out = "";
-    for (let i = 0; i < 8; i++) {
-      out += this.h[i].toString(16).padStart(8, "0");
-    }
+    for (let i = 0; i < 8; i++) out += this.h[i].toString(16).padStart(8, "0");
     return out;
   }
 }
 
-/* ---------- 簡易 ZIP writer (no compression, store mode) ----------
-   STORE 模式只係將原檔 byte 過 byte 寫入 zip，唔解壓嘅話對切完嘅 part
-   完全冇影響。我哋唔需要壓縮，純粹做容器。
-   ZIP64 支援所以單一 entry 大過 4 GB 都得。 */
 class ZipWriter {
-  constructor() {
-    this.entries = [];
-    this.parts = [];        // Uint8Array[]，最後 concat 成 Blob
-    this.offset = 0n;
-    this.crcTable = ZipWriter._crcTable();
-  }
+  constructor() { this.entries = []; this.parts = []; this.offset = 0n; this.crcTable = ZipWriter._crcTable(); }
   static _crcTable() {
     const t = new Uint32Array(256);
-    for (let n = 0; n < 256; n++) {
-      let c = n;
-      for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
-      t[n] = c;
-    }
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1); t[n] = c; }
     return t;
   }
   _crc32(data) {
     let c = 0xffffffff;
-    for (let i = 0; i < data.length; i++) {
-      c = this.crcTable[(c ^ data[i]) & 0xff] ^ (c >>> 8);
-    }
+    for (let i = 0; i < data.length; i++) c = this.crcTable[(c ^ data[i]) & 0xff] ^ (c >>> 8);
     return (c ^ 0xffffffff) >>> 0;
   }
-  _push(buf) {
-    this.parts.push(buf);
-    this.offset += BigInt(buf.length);
-  }
-  /* utf8 filename */
+  _push(buf) { this.parts.push(buf); this.offset += BigInt(buf.length); }
   _enc(s) { return new TextEncoder().encode(s); }
-
   addFile(name, data) {
-    /* data: Uint8Array */
     const nameBytes = this._enc(name);
     const crc = this._crc32(data);
     const size = data.length;
     const useZip64 = size >= 0xffffffff;
     const entryOffset = this.offset;
-
-    /* Local file header */
     const lfh = new Uint8Array(30 + nameBytes.length + (useZip64 ? 20 : 0));
     const dv = new DataView(lfh.buffer);
-    dv.setUint32(0, 0x04034b50, true);            // signature
-    dv.setUint16(4, useZip64 ? 45 : 20, true);    // version needed
-    dv.setUint16(6, 0x0800, true);                // flags: utf8 name
-    dv.setUint16(8, 0, true);                     // method: store
-    dv.setUint16(10, 0, true);                    // mod time
-    dv.setUint16(12, 0x21, true);                 // mod date (some date)
+    dv.setUint32(0, 0x04034b50, true);
+    dv.setUint16(4, useZip64 ? 45 : 20, true);
+    dv.setUint16(6, 0x0800, true);
+    dv.setUint16(8, 0, true);
+    dv.setUint16(10, 0, true); dv.setUint16(12, 0x21, true);
     dv.setUint32(14, crc, true);
-    dv.setUint32(18, useZip64 ? 0xffffffff : size, true); // compressed size
-    dv.setUint32(22, useZip64 ? 0xffffffff : size, true); // uncompressed size
+    dv.setUint32(18, useZip64 ? 0xffffffff : size, true);
+    dv.setUint32(22, useZip64 ? 0xffffffff : size, true);
     dv.setUint16(26, nameBytes.length, true);
-    dv.setUint16(28, useZip64 ? 20 : 0, true);    // extra length
+    dv.setUint16(28, useZip64 ? 20 : 0, true);
     lfh.set(nameBytes, 30);
     if (useZip64) {
       const ev = new DataView(lfh.buffer, 30 + nameBytes.length, 20);
-      ev.setUint16(0, 0x0001, true);   // ZIP64 tag
-      ev.setUint16(2, 16, true);
+      ev.setUint16(0, 0x0001, true); ev.setUint16(2, 16, true);
       ev.setBigUint64(4, BigInt(size), true);
       ev.setBigUint64(12, BigInt(size), true);
     }
-    this._push(lfh);
-    this._push(data);
-
+    this._push(lfh); this._push(data);
     this.entries.push({ name: nameBytes, size, crc, offset: entryOffset, useZip64 });
   }
-
   finalize() {
     const cdStart = this.offset;
-    /* Central directory */
     for (const e of this.entries) {
       const useZip64 = e.useZip64 || e.offset >= 0xffffffffn;
       const extraLen = useZip64 ? (4 + (e.size >= 0xffffffff ? 16 : 0) + (e.offset >= 0xffffffffn ? 8 : 0)) : 0;
       const cd = new Uint8Array(46 + e.name.length + extraLen);
       const dv = new DataView(cd.buffer);
       dv.setUint32(0, 0x02014b50, true);
-      dv.setUint16(4, useZip64 ? 45 : 20, true);   // version made by
-      dv.setUint16(6, useZip64 ? 45 : 20, true);   // version needed
+      dv.setUint16(4, useZip64 ? 45 : 20, true);
+      dv.setUint16(6, useZip64 ? 45 : 20, true);
       dv.setUint16(8, 0x0800, true);
-      dv.setUint16(10, 0, true);
-      dv.setUint16(12, 0, true);
+      dv.setUint16(10, 0, true); dv.setUint16(12, 0, true);
       dv.setUint16(14, 0x21, true);
       dv.setUint32(16, e.crc, true);
       dv.setUint32(20, e.size >= 0xffffffff ? 0xffffffff : e.size, true);
       dv.setUint32(24, e.size >= 0xffffffff ? 0xffffffff : e.size, true);
       dv.setUint16(28, e.name.length, true);
       dv.setUint16(30, extraLen, true);
-      dv.setUint16(32, 0, true);    // comment len
-      dv.setUint16(34, 0, true);    // disk #
-      dv.setUint16(36, 0, true);    // internal attr
-      dv.setUint32(38, 0, true);    // external attr
+      dv.setUint16(32, 0, true); dv.setUint16(34, 0, true);
+      dv.setUint16(36, 0, true); dv.setUint32(38, 0, true);
       dv.setUint32(42, e.offset >= 0xffffffffn ? 0xffffffff : Number(e.offset), true);
       cd.set(e.name, 46);
       if (useZip64) {
         let p = 46 + e.name.length;
         const ev = new DataView(cd.buffer);
         ev.setUint16(p, 0x0001, true); ev.setUint16(p+2, extraLen - 4, true); p += 4;
-        if (e.size >= 0xffffffff) {
-          ev.setBigUint64(p, BigInt(e.size), true); p += 8;
-          ev.setBigUint64(p, BigInt(e.size), true); p += 8;
-        }
-        if (e.offset >= 0xffffffffn) {
-          ev.setBigUint64(p, e.offset, true);
-        }
+        if (e.size >= 0xffffffff) { ev.setBigUint64(p, BigInt(e.size), true); p += 8; ev.setBigUint64(p, BigInt(e.size), true); p += 8; }
+        if (e.offset >= 0xffffffffn) ev.setBigUint64(p, e.offset, true);
       }
       this._push(cd);
     }
     const cdSize = this.offset - cdStart;
     const cdOffset = cdStart;
-
-    /* If we exceed 4 GB total, write ZIP64 records */
     const needZ64 = (cdOffset >= 0xffffffffn) || (cdSize >= 0xffffffffn) || (this.entries.length >= 0xffff);
-
     if (needZ64) {
-      const z64eocdr = new Uint8Array(56);
-      const dv = new DataView(z64eocdr.buffer);
+      const z64 = new Uint8Array(56);
+      const dv = new DataView(z64.buffer);
       dv.setUint32(0, 0x06064b50, true);
       dv.setBigUint64(4, 44n, true);
-      dv.setUint16(12, 45, true);
-      dv.setUint16(14, 45, true);
-      dv.setUint32(16, 0, true);
-      dv.setUint32(20, 0, true);
+      dv.setUint16(12, 45, true); dv.setUint16(14, 45, true);
+      dv.setUint32(16, 0, true); dv.setUint32(20, 0, true);
       dv.setBigUint64(24, BigInt(this.entries.length), true);
       dv.setBigUint64(32, BigInt(this.entries.length), true);
       dv.setBigUint64(40, cdSize, true);
       dv.setBigUint64(48, cdOffset, true);
-      const z64loc = new Uint8Array(20);
-      const dv2 = new DataView(z64loc.buffer);
+      const loc = new Uint8Array(20);
+      const dv2 = new DataView(loc.buffer);
       dv2.setUint32(0, 0x07064b50, true);
       dv2.setUint32(4, 0, true);
       dv2.setBigUint64(8, this.offset, true);
       dv2.setUint32(16, 1, true);
-      this._push(z64eocdr);
-      this._push(z64loc);
+      this._push(z64); this._push(loc);
     }
-
-    /* End of central directory */
     const eocd = new Uint8Array(22);
     const dvE = new DataView(eocd.buffer);
     dvE.setUint32(0, 0x06054b50, true);
-    dvE.setUint16(4, 0, true);
-    dvE.setUint16(6, 0, true);
+    dvE.setUint16(4, 0, true); dvE.setUint16(6, 0, true);
     dvE.setUint16(8, Math.min(this.entries.length, 0xffff), true);
     dvE.setUint16(10, Math.min(this.entries.length, 0xffff), true);
     dvE.setUint32(12, cdSize >= 0xffffffffn ? 0xffffffff : Number(cdSize), true);
     dvE.setUint32(16, cdOffset >= 0xffffffffn ? 0xffffffff : Number(cdOffset), true);
     dvE.setUint16(20, 0, true);
     this._push(eocd);
-
     return new Blob(this.parts, { type: "application/zip" });
   }
 }
 
-/* ---------- 切割主邏輯 ---------- */
-class Splitter {
-  constructor(opts) {
-    this.chunkBytes = Math.max(1, Math.round(opts.chunkMb * 1024 * 1024));
-    this.copySmall = opts.copySmall;
-    this.verifyHash = opts.verifyHash;
-  }
+const $ = (id) => document.getElementById(id);
+const fmtSize = (n) => {
+  if (n === 0) return "0 B";
+  const u = ["B","KB","MB","GB","TB"]; let i=0, v=n;
+  while (v >= 1024 && i < u.length-1) { v /= 1024; i++; }
+  return v.toFixed(i===0 ? 0 : 2) + " " + u[i];
+};
+const sanitize = (s) => s.replace(/[<>:"/\\|?*\x00]/g, "_").replace(/^[\s.]+|[\s.]+$/g, "") || "file";
+const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 
-  async splitOne(file, onProgress) {
-    /* 回傳: { kind: "split"|"copy"|"skip", parts: [{name,blob,sha256}],
-              manifest, originalSha256, packedZipBlob } */
-    const size = file.size;
-    const result = {
-      name: file.name,
-      size,
-      kind: "split",
-      parts: [],
-      manifest: null,
-      packedBlob: null,
-      error: null,
-    };
+function logTo(elId, msg, cls) {
+  const el = $(elId);
+  const span = document.createElement("span");
+  if (cls) span.className = cls;
+  span.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  el.appendChild(span); el.appendChild(document.createTextNode("\n"));
+  el.scrollTop = el.scrollHeight;
+}
 
+function iosDownload(blob, filename) {
+  if (navigator.share && navigator.canShare) {
     try {
-      if (size === 0 || size <= this.chunkBytes) {
-        /* 細檔案 / 空檔案：copy 或 skip */
-        result.kind = this.copySmall ? "copy" : "skip";
-        if (this.copySmall) {
-          /* 用「一片」嘅形式包入 zip + 寫 manifest，咁合併邏輯統一 */
-          const buf = size === 0 ? new Uint8Array(0)
-                                 : new Uint8Array(await file.arrayBuffer());
-          let sha = "";
-          if (this.verifyHash) {
-            const h = new SHA256(); h.update(buf); sha = h.digestHex();
-          }
-          const partName = `${file.name}.part001`;
-          const manifest = {
-            manifest_version: 1,
-            original_filename: file.name,
-            original_extension: (file.name.includes(".") ? "." + file.name.split(".").pop() : ""),
-            original_size: size,
-            chunk_size: this.chunkBytes,
-            num_parts: size === 0 ? 0 : 1,
-            sha256: sha,
-            created_utc: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
-            tool: "filesplitter-web",
-            note: "copied (under threshold)",
-            parts: size === 0 ? [] : [{ name: partName, size: buf.length, sha256: sha }],
-          };
-          const zw = new ZipWriter();
-          if (size > 0) zw.addFile(partName, buf);
-          zw.addFile(MANIFEST_NAME,
-            new TextEncoder().encode(JSON.stringify(manifest, null, 2)));
-          result.parts = size === 0 ? [] : [{
-            name: partName, size: buf.length, sha256: sha,
-            blob: new Blob([buf], { type: "application/octet-stream" }),
-          }];
-          result.manifest = manifest;
-          result.packedBlob = zw.finalize();
-          result.zipName = sanitizeFolder(file.name) + ".zip";
-        }
-        onProgress(size, size);
-        return result;
+      const file = new File([blob], filename, { type: blob.type || "application/octet-stream" });
+      if (navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: filename }).catch(() => fallback());
+        return;
       }
-
-      /* 真正切割 */
-      const chunkBytes = this.chunkBytes;
-      const numParts = Math.ceil(size / chunkBytes);
-      const wholeHash = this.verifyHash ? new SHA256() : null;
-
-      const parts = [];
-      let offset = 0;
-      let partIdx = 1;
-
-      while (offset < size) {
-        const end = Math.min(offset + chunkBytes, size);
-        const slice = file.slice(offset, end);
-
-        /* 為咗算 hash 同寫 zip，要將呢一片讀入 memory。
-           我哋限制每片 ≤ chunkBytes (預設 ~30MB)，所以好安全。 */
-        const buf = new Uint8Array(await slice.arrayBuffer());
-
-        const partName = `${file.name}.part${String(partIdx).padStart(3, "0")}`;
-        let partSha = "";
-        if (this.verifyHash) {
-          const h = new SHA256();
-          h.update(buf);
-          partSha = h.digestHex();
-          wholeHash.update(buf);
-        }
-        parts.push({ name: partName, size: buf.length, sha256: partSha, data: buf });
-        offset = end; partIdx++;
-        onProgress(offset, size);
-        await new Promise(r => setTimeout(r, 0));    // 讓 UI 有機會更新
-      }
-
-      const originalSha = this.verifyHash ? wholeHash.digestHex() : "";
-
-      const manifest = {
-        manifest_version: 1,
-        original_filename: file.name,
-        original_extension: (file.name.includes(".") ? "." + file.name.split(".").pop() : ""),
-        original_size: size,
-        chunk_size: chunkBytes,
-        num_parts: parts.length,
-        sha256: originalSha,
-        created_utc: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
-        tool: "filesplitter-web",
-        parts: parts.map(p => ({ name: p.name, size: p.size, sha256: p.sha256 })),
-      };
-
-      /* 將所有 part + manifest 包做 zip 方便一個 download 完成 */
-      const zw = new ZipWriter();
-      for (const p of parts) zw.addFile(p.name, p.data);
-      zw.addFile(MANIFEST_NAME,
-        new TextEncoder().encode(JSON.stringify(manifest, null, 2))
-      );
-      result.parts = parts.map(p => ({
-        name: p.name, size: p.size, sha256: p.sha256,
-        blob: new Blob([p.data], { type: "application/octet-stream" }),
-      }));
-      result.manifest = manifest;
-      result.packedBlob = zw.finalize();
-      result.zipName = sanitizeFolder(file.name) + ".zip";
-      return result;
+    } catch (e) {}
+  }
+  fallback();
+  function fallback() {
+    try {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = filename; a.style.display = "none";
+      document.body.appendChild(a); a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
     } catch (e) {
-      result.kind = "error";
-      result.error = e && e.message ? e.message : String(e);
-      return result;
+      try { window.open(URL.createObjectURL(blob), "_blank"); }
+      catch (e2) { alert("下載失敗: " + e2.message); }
     }
   }
 }
 
-/* ============================================================================
-   合併主邏輯
-   ============================================================================ */
-class Merger {
-  /* 接受一堆 File，自動分組（用 manifest 入面嘅 part name 對應），
-     合併成原檔。*/
-
-  static async _readZipEntries(file) {
-    /* 讀 zip 嘅 EOCD 同 central directory，取得每個 entry 嘅 name + 範圍。
-       淨係 STORE 模式（method=0）先支援 —— 我哋自己整出嚟嘅永遠係 STORE。*/
-    const size = file.size;
-    /* 搵 EOCD：尾 22 byte 開始倒搵 signature 0x06054b50 */
-    const tailLen = Math.min(size, 65557);
-    const tail = new Uint8Array(await file.slice(size - tailLen, size).arrayBuffer());
-    let eocd = -1;
-    for (let i = tail.length - 22; i >= 0; i--) {
-      if (tail[i] === 0x50 && tail[i+1] === 0x4b && tail[i+2] === 0x05 && tail[i+3] === 0x06) {
-        eocd = i; break;
+async function splitFile(file, opts, onProgress) {
+  const chunkBytes = Math.max(1, Math.round(opts.chunkMb * 1024 * 1024));
+  const size = file.size;
+  const result = { name: file.name, size, kind: "split", parts: [], packedBlob: null, manifest: null, error: null };
+  try {
+    if (size === 0 || size <= chunkBytes) {
+      result.kind = opts.copySmall ? "copy" : "skip";
+      if (opts.copySmall) {
+        const buf = size === 0 ? new Uint8Array(0) : new Uint8Array(await file.arrayBuffer());
+        let sha = "";
+        if (opts.verifyHash) { const h = new SHA256(); h.update(buf); sha = h.digestHex(); }
+        const partName = `${file.name}.part001`;
+        const manifest = {
+          manifest_version: 1,
+          original_filename: file.name,
+          original_extension: (file.name.includes(".") ? "." + file.name.split(".").pop() : ""),
+          original_size: size, chunk_size: chunkBytes,
+          num_parts: size === 0 ? 0 : 1, sha256: sha,
+          created_utc: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
+          tool: "filesplitter-web",
+          parts: size === 0 ? [] : [{ name: partName, size: buf.length, sha256: sha }],
+        };
+        const zw = new ZipWriter();
+        if (size > 0) zw.addFile(partName, buf);
+        zw.addFile("manifest.json", new TextEncoder().encode(JSON.stringify(manifest, null, 2)));
+        result.parts = size === 0 ? [] : [{ name: partName, size: buf.length, sha256: sha, blob: new Blob([buf]) }];
+        result.manifest = manifest;
+        result.packedBlob = zw.finalize();
+        result.zipName = sanitize(file.name) + ".zip";
       }
+      onProgress(size, size);
+      return result;
     }
-    if (eocd < 0) throw new Error("唔係有效嘅 ZIP（揾唔到 EOCD）");
-    const dv = new DataView(tail.buffer, tail.byteOffset + eocd);
-    let entries = dv.getUint16(10, true);
-    let cdSize = dv.getUint32(12, true);
-    let cdOffset = dv.getUint32(16, true);
-
-    /* ZIP64 处理 */
-    if (cdOffset === 0xffffffff || cdSize === 0xffffffff || entries === 0xffff) {
-      /* 揾 ZIP64 EOCD locator (20 bytes before EOCD) */
-      if (eocd >= 20) {
-        const loc = new DataView(tail.buffer, tail.byteOffset + eocd - 20);
-        if (loc.getUint32(0, true) === 0x07064b50) {
-          const z64Off = Number(loc.getBigUint64(8, true));
-          const z64Buf = new Uint8Array(await file.slice(z64Off, z64Off + 56).arrayBuffer());
-          const zd = new DataView(z64Buf.buffer);
-          if (zd.getUint32(0, true) === 0x06064b50) {
-            entries = Number(zd.getBigUint64(32, true));
-            cdSize = Number(zd.getBigUint64(40, true));
-            cdOffset = Number(zd.getBigUint64(48, true));
-          }
-        }
-      }
+    const wholeHash = opts.verifyHash ? new SHA256() : null;
+    const parts = [];
+    let offset = 0, partIdx = 1;
+    while (offset < size) {
+      const end = Math.min(offset + chunkBytes, size);
+      const slice = file.slice(offset, end);
+      const buf = new Uint8Array(await slice.arrayBuffer());
+      const partName = `${file.name}.part${String(partIdx).padStart(3, "0")}`;
+      let partSha = "";
+      if (opts.verifyHash) { const h = new SHA256(); h.update(buf); partSha = h.digestHex(); wholeHash.update(buf); }
+      parts.push({ name: partName, size: buf.length, sha256: partSha, data: buf });
+      offset = end; partIdx++;
+      onProgress(offset, size);
+      await new Promise(r => setTimeout(r, 0));
     }
-
-    /* 讀 central directory */
-    const cdBuf = new Uint8Array(await file.slice(cdOffset, cdOffset + cdSize).arrayBuffer());
-    const cdv = new DataView(cdBuf.buffer);
-    const result = [];
-    let p = 0;
-    for (let i = 0; i < entries; i++) {
-      if (cdv.getUint32(p, true) !== 0x02014b50) throw new Error("ZIP central dir 損壞");
-      const method = cdv.getUint16(p + 10, true);
-      let cSize = cdv.getUint32(p + 20, true);
-      let uSize = cdv.getUint32(p + 24, true);
-      const nLen = cdv.getUint16(p + 28, true);
-      const eLen = cdv.getUint16(p + 30, true);
-      const cLen = cdv.getUint16(p + 32, true);
-      let lfhOff = cdv.getUint32(p + 42, true);
-      const name = new TextDecoder("utf-8").decode(cdBuf.subarray(p + 46, p + 46 + nLen));
-
-      /* extra field for ZIP64 */
-      if (cSize === 0xffffffff || uSize === 0xffffffff || lfhOff === 0xffffffff) {
-        let q = p + 46 + nLen;
-        const qEnd = q + eLen;
-        while (q + 4 <= qEnd) {
-          const tag = cdv.getUint16(q, true);
-          const len = cdv.getUint16(q + 2, true);
-          if (tag === 0x0001) {
-            let r = q + 4;
-            if (uSize === 0xffffffff) { uSize = Number(cdv.getBigUint64(r, true)); r += 8; }
-            if (cSize === 0xffffffff) { cSize = Number(cdv.getBigUint64(r, true)); r += 8; }
-            if (lfhOff === 0xffffffff) { lfhOff = Number(cdv.getBigUint64(r, true)); r += 8; }
-            break;
-          }
-          q += 4 + len;
-        }
-      }
-
-      if (method !== 0) throw new Error(`Entry "${name}" 用咗壓縮，本工具淨係支援 STORE 模式 zip`);
-
-      /* 計 data 開始位置：要先讀 LFH 攞 name length + extra length */
-      const lfhHdr = new Uint8Array(await file.slice(lfhOff, lfhOff + 30).arrayBuffer());
-      const lv = new DataView(lfhHdr.buffer);
-      if (lv.getUint32(0, true) !== 0x04034b50) throw new Error("LFH 損壞");
-      const ln = lv.getUint16(26, true);
-      const le = lv.getUint16(28, true);
-      const dataStart = lfhOff + 30 + ln + le;
-
-      result.push({
-        name,
-        size: uSize,
-        offset: dataStart,
-        sliceFrom: dataStart,
-        sliceTo: dataStart + cSize,
-        sourceFile: file,
-      });
-      p += 46 + nLen + eLen + cLen;
-    }
+    const originalSha = opts.verifyHash ? wholeHash.digestHex() : "";
+    const manifest = {
+      manifest_version: 1,
+      original_filename: file.name,
+      original_extension: (file.name.includes(".") ? "." + file.name.split(".").pop() : ""),
+      original_size: size, chunk_size: chunkBytes,
+      num_parts: parts.length, sha256: originalSha,
+      created_utc: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
+      tool: "filesplitter-web",
+      parts: parts.map(p => ({ name: p.name, size: p.size, sha256: p.sha256 })),
+    };
+    const zw = new ZipWriter();
+    for (const p of parts) zw.addFile(p.name, p.data);
+    zw.addFile("manifest.json", new TextEncoder().encode(JSON.stringify(manifest, null, 2)));
+    result.parts = parts.map(p => ({ name: p.name, size: p.size, sha256: p.sha256, blob: new Blob([p.data]) }));
+    result.manifest = manifest;
+    result.packedBlob = zw.finalize();
+    result.zipName = sanitize(file.name) + ".zip";
+    return result;
+  } catch (e) {
+    result.kind = "error";
+    result.error = e?.message || String(e);
     return result;
   }
-
-  static async groupInputs(files) {
-    /* 將 input File 分組：
-       (1) 如果係 .zip，內裡一定有 manifest.json + parts，當成完整一組。
-       (2) 否則睇 manifest.json + .partXXX 分散檔，按 manifest 入面 parts.name 對應。 */
-    const groups = [];
-    const looseManifests = [];
-    const looseParts = new Map();    // name -> File
-
-    for (const f of files) {
-      if (f.name.toLowerCase().endsWith(".zip")) {
-        try {
-          const entries = await Merger._readZipEntries(f);
-          const mani = entries.find(e => e.name === MANIFEST_NAME);
-          if (!mani) throw new Error(`zip "${f.name}" 入面冇 manifest.json`);
-          const buf = new Uint8Array(await f.slice(mani.sliceFrom, mani.sliceTo).arrayBuffer());
-          const manifest = JSON.parse(new TextDecoder().decode(buf));
-          const partMap = new Map();
-          for (const e of entries) {
-            if (e.name !== MANIFEST_NAME) partMap.set(e.name, e);
-          }
-          groups.push({ manifest, source: "zip", zipFile: f, partEntries: partMap });
-        } catch (e) {
-          groups.push({ error: `${f.name}: ${e.message}` });
-        }
-      } else if (f.name === MANIFEST_NAME) {
-        looseManifests.push(f);
-      } else {
-        looseParts.set(f.name, f);
-      }
-    }
-
-    for (const mf of looseManifests) {
-      try {
-        const text = await mf.text();
-        const manifest = JSON.parse(text);
-        const partMap = new Map();
-        const missing = [];
-        for (const p of manifest.parts) {
-          const f = looseParts.get(p.name);
-          if (!f) missing.push(p.name);
-          else partMap.set(p.name, f);
-        }
-        if (missing.length > 0) {
-          groups.push({ error: `${manifest.original_filename}: 欠咗 ${missing.length} 個 part (${missing.slice(0,3).join(", ")}${missing.length>3?"...":""})` });
-        } else {
-          groups.push({ manifest, source: "loose", partFiles: partMap });
-        }
-      } catch (e) {
-        groups.push({ error: `${mf.name}: ${e.message}` });
-      }
-    }
-
-    return groups;
-  }
-
-  static async mergeOne(group, opts, onProgress) {
-    const result = { name: "", size: 0, kind: "merge", blob: null, ok: false, error: null, sha256: "", expectedSha: "" };
-    if (group.error) { result.error = group.error; return result; }
-    const m = group.manifest;
-    result.name = m.original_filename;
-    result.expectedSha = m.sha256 || "";
-
-    try {
-      const totalSize = m.original_size;
-      const hasher = opts.verifyHash && m.sha256 ? new SHA256() : null;
-      const blobs = [];
-      let bytesDone = 0;
-
-      if (totalSize === 0) {
-        /* 空檔案 */
-        result.size = 0;
-        result.blob = new Blob([], { type: "application/octet-stream" });
-        result.ok = true;
-        onProgress(0, 0);
-        return result;
-      }
-
-      for (const partInfo of m.parts) {
-        let blob;
-        if (group.source === "zip") {
-          const entry = group.partEntries.get(partInfo.name);
-          if (!entry) throw new Error(`zip 入面欠咗 part: ${partInfo.name}`);
-          blob = group.zipFile.slice(entry.sliceFrom, entry.sliceTo);
-        } else {
-          blob = group.partFiles.get(partInfo.name);
-          if (!blob) throw new Error(`欠咗 part 檔案: ${partInfo.name}`);
-        }
-        if (hasher) {
-          const buf = new Uint8Array(await blob.arrayBuffer());
-          hasher.update(buf);
-          blobs.push(new Blob([buf]));
-          bytesDone += buf.length;
-        } else {
-          blobs.push(blob);
-          bytesDone += blob.size;
-        }
-        onProgress(bytesDone, totalSize);
-        await new Promise(r => setTimeout(r, 0));
-      }
-
-      const merged = new Blob(blobs, { type: "application/octet-stream" });
-      if (merged.size !== totalSize) {
-        throw new Error(`size mismatch (${merged.size} vs ${totalSize})`);
-      }
-      if (hasher) {
-        const sha = hasher.digestHex();
-        result.sha256 = sha;
-        if (m.sha256 && sha !== m.sha256) {
-          throw new Error(`SHA256 不匹配 (got ${sha.slice(0,16)}…, expected ${m.sha256.slice(0,16)}…)`);
-        }
-      }
-      result.size = merged.size;
-      result.blob = merged;
-      result.ok = true;
-      return result;
-    } catch (e) {
-      result.error = e.message || String(e);
-      return result;
-    }
-  }
 }
 
-/* ============================================================================
-   UI 連結
-   ============================================================================ */
+async function readZipEntries(file) {
+  const size = file.size;
+  const tailLen = Math.min(size, 65557);
+  const tail = new Uint8Array(await file.slice(size - tailLen, size).arrayBuffer());
+  let eocd = -1;
+  for (let i = tail.length - 22; i >= 0; i--) {
+    if (tail[i]===0x50 && tail[i+1]===0x4b && tail[i+2]===0x05 && tail[i+3]===0x06) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error("唔係有效嘅 ZIP");
+  const dv = new DataView(tail.buffer, tail.byteOffset + eocd);
+  let entries = dv.getUint16(10, true);
+  let cdSize = dv.getUint32(12, true);
+  let cdOffset = dv.getUint32(16, true);
+  if (cdOffset === 0xffffffff || cdSize === 0xffffffff || entries === 0xffff) {
+    if (eocd >= 20) {
+      const loc = new DataView(tail.buffer, tail.byteOffset + eocd - 20);
+      if (loc.getUint32(0, true) === 0x07064b50) {
+        const z64Off = Number(loc.getBigUint64(8, true));
+        const z64Buf = new Uint8Array(await file.slice(z64Off, z64Off + 56).arrayBuffer());
+        const zd = new DataView(z64Buf.buffer);
+        if (zd.getUint32(0, true) === 0x06064b50) {
+          entries = Number(zd.getBigUint64(32, true));
+          cdSize = Number(zd.getBigUint64(40, true));
+          cdOffset = Number(zd.getBigUint64(48, true));
+        }
+      }
+    }
+  }
+  const cdBuf = new Uint8Array(await file.slice(cdOffset, cdOffset + cdSize).arrayBuffer());
+  const cdv = new DataView(cdBuf.buffer);
+  const result = [];
+  let p = 0;
+  for (let i = 0; i < entries; i++) {
+    if (cdv.getUint32(p, true) !== 0x02014b50) throw new Error("ZIP CD 損壞");
+    const method = cdv.getUint16(p + 10, true);
+    let cSize = cdv.getUint32(p + 20, true);
+    let uSize = cdv.getUint32(p + 24, true);
+    const nLen = cdv.getUint16(p + 28, true);
+    const eLen = cdv.getUint16(p + 30, true);
+    const cLen = cdv.getUint16(p + 32, true);
+    let lfhOff = cdv.getUint32(p + 42, true);
+    const name = new TextDecoder("utf-8").decode(cdBuf.subarray(p + 46, p + 46 + nLen));
+    if (cSize === 0xffffffff || uSize === 0xffffffff || lfhOff === 0xffffffff) {
+      let q = p + 46 + nLen; const qEnd = q + eLen;
+      while (q + 4 <= qEnd) {
+        const tag = cdv.getUint16(q, true);
+        const len = cdv.getUint16(q + 2, true);
+        if (tag === 0x0001) {
+          let r = q + 4;
+          if (uSize === 0xffffffff) { uSize = Number(cdv.getBigUint64(r, true)); r += 8; }
+          if (cSize === 0xffffffff) { cSize = Number(cdv.getBigUint64(r, true)); r += 8; }
+          if (lfhOff === 0xffffffff) { lfhOff = Number(cdv.getBigUint64(r, true)); r += 8; }
+          break;
+        }
+        q += 4 + len;
+      }
+    }
+    if (method !== 0) throw new Error(`Entry "${name}" 用咗壓縮，唔支援`);
+    const lfhHdr = new Uint8Array(await file.slice(lfhOff, lfhOff + 30).arrayBuffer());
+    const lv = new DataView(lfhHdr.buffer);
+    if (lv.getUint32(0, true) !== 0x04034b50) throw new Error("LFH 損壞");
+    const ln = lv.getUint16(26, true);
+    const le = lv.getUint16(28, true);
+    const dataStart = lfhOff + 30 + ln + le;
+    result.push({ name, size: uSize, sliceFrom: dataStart, sliceTo: dataStart + cSize });
+    p += 46 + nLen + eLen + cLen;
+  }
+  return result;
+}
+
+async function groupMergeInputs(files) {
+  const groups = []; const looseManifests = []; const looseParts = new Map();
+  for (const f of files) {
+    if (f.name.toLowerCase().endsWith(".zip")) {
+      try {
+        const entries = await readZipEntries(f);
+        const mani = entries.find(e => e.name === "manifest.json");
+        if (!mani) throw new Error(`zip 入面冇 manifest.json`);
+        const buf = new Uint8Array(await f.slice(mani.sliceFrom, mani.sliceTo).arrayBuffer());
+        const manifest = JSON.parse(new TextDecoder().decode(buf));
+        const partMap = new Map();
+        for (const e of entries) if (e.name !== "manifest.json") partMap.set(e.name, e);
+        groups.push({ manifest, source: "zip", zipFile: f, partEntries: partMap });
+      } catch (e) { groups.push({ error: `${f.name}: ${e.message}` }); }
+    } else if (f.name === "manifest.json") {
+      looseManifests.push(f);
+    } else { looseParts.set(f.name, f); }
+  }
+  for (const mf of looseManifests) {
+    try {
+      const manifest = JSON.parse(await mf.text());
+      const partMap = new Map();
+      const missing = [];
+      for (const p of manifest.parts) {
+        const f = looseParts.get(p.name);
+        if (!f) missing.push(p.name); else partMap.set(p.name, f);
+      }
+      if (missing.length) groups.push({ error: `${manifest.original_filename}: 欠 ${missing.length} 個 part` });
+      else groups.push({ manifest, source: "loose", partFiles: partMap });
+    } catch (e) { groups.push({ error: `${mf.name}: ${e.message}` }); }
+  }
+  return groups;
+}
+
+async function mergeOne(group, opts, onProgress) {
+  const result = { name: "", blob: null, ok: false, error: null, sha256: "" };
+  if (group.error) { result.error = group.error; return result; }
+  const m = group.manifest;
+  result.name = m.original_filename;
+  try {
+    const total = m.original_size;
+    const hasher = opts.verifyHash && m.sha256 ? new SHA256() : null;
+    const blobs = []; let done = 0;
+    if (total === 0) { result.blob = new Blob([]); result.ok = true; onProgress(0, 0); return result; }
+    for (const p of m.parts) {
+      let blob;
+      if (group.source === "zip") {
+        const e = group.partEntries.get(p.name);
+        if (!e) throw new Error(`zip 內欠 ${p.name}`);
+        blob = group.zipFile.slice(e.sliceFrom, e.sliceTo);
+      } else {
+        blob = group.partFiles.get(p.name);
+        if (!blob) throw new Error(`欠 ${p.name}`);
+      }
+      if (hasher) {
+        const buf = new Uint8Array(await blob.arrayBuffer());
+        hasher.update(buf);
+        blobs.push(new Blob([buf])); done += buf.length;
+      } else { blobs.push(blob); done += blob.size; }
+      onProgress(done, total);
+      await new Promise(r => setTimeout(r, 0));
+    }
+    const merged = new Blob(blobs);
+    if (merged.size !== total) throw new Error(`size mismatch ${merged.size} vs ${total}`);
+    if (hasher) {
+      const sha = hasher.digestHex();
+      if (m.sha256 && sha !== m.sha256) throw new Error(`SHA256 mismatch`);
+      result.sha256 = sha;
+    }
+    result.blob = merged; result.ok = true;
+    return result;
+  } catch (e) { result.error = e.message || String(e); return result; }
+}
+
 const state = {
-  splitFiles: [],
-  mergeFiles: [],
+  splitFiles: [], mergeFiles: [],
+  toggles: { auto: true, copy: true, hash: true },
 };
 
-/* tab 切換 */
 document.querySelectorAll(".tab").forEach(t => {
   t.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
@@ -1048,374 +726,203 @@ document.querySelectorAll(".tab").forEach(t => {
   });
 });
 
-/* ---------- 切割 UI ---------- */
-const dropZone = $("dropZone");
-const fileInput = $("fileInput");
-const queueEl = $("queue");
-const queueCountEl = $("queueCount");
-const startBtn = $("startBtn");
-const logEl = $("log");
-const resultPanel = $("resultPanel");
-const summaryEl = $("summary");
-const downloadsEl = $("downloads");
+function setupToggle(rowId, key) {
+  const row = $(rowId);
+  const btn = row.querySelector(".toggle-btn");
+  const update = () => btn.classList.toggle("on", state.toggles[key]);
+  row.addEventListener("click", () => { state.toggles[key] = !state.toggles[key]; update(); });
+  update();
+}
+setupToggle("toggle-auto", "auto");
+setupToggle("toggle-copy", "copy");
+setupToggle("toggle-hash", "hash");
 
-dropZone.addEventListener("click", () => fileInput.click());
-fileInput.addEventListener("change", e => {
-  addSplitFiles(Array.from(e.target.files));
-  fileInput.value = "";
-});
-["dragenter","dragover"].forEach(evt => {
-  dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add("hover"); });
-});
-["dragleave","drop"].forEach(evt => {
-  dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove("hover"); });
-});
-dropZone.addEventListener("drop", e => {
-  if (e.dataTransfer && e.dataTransfer.files) {
-    addSplitFiles(Array.from(e.dataTransfer.files));
-  }
-});
-
-$("clearBtn").addEventListener("click", () => {
-  state.splitFiles = [];
-  queueEl.innerHTML = "";
-  queueCountEl.textContent = "";
-  startBtn.disabled = true;
-  resultPanel.classList.add("hidden");
-});
-
-function addSplitFiles(files) {
-  if (!files || files.length === 0) return;
+$("splitFileInput").addEventListener("change", (e) => {
+  const files = Array.from(e.target.files);
+  if (files.length === 0) return;
   const seen = new Set(state.splitFiles.map(f => f.name + "|" + f.size));
   let added = 0;
   for (const f of files) {
     const key = f.name + "|" + f.size;
     if (seen.has(key)) continue;
-    seen.add(key);
-    state.splitFiles.push(f);
-    added++;
-    addQueueRow(f);
+    seen.add(key); state.splitFiles.push(f); added++;
   }
-  queueCountEl.textContent = `Queue 共 ${state.splitFiles.length} 個檔案`;
-  startBtn.disabled = state.splitFiles.length === 0;
-  logTo(logEl, `加入 ${added} 個檔案到 queue。`);
-  if ($("autoStart").checked && added > 0 && !startBtn.disabled) {
-    startSplit();
-  }
-}
+  refreshSplitQueue();
+  logTo("splitLog", `加入 ${added} 個檔案，queue 共 ${state.splitFiles.length} 個`);
+  if (state.toggles.auto && state.splitFiles.length > 0) setTimeout(startSplit, 100);
+});
 
-function addQueueRow(file) {
-  const div = document.createElement("div");
-  div.className = "file";
-  div.dataset.fileKey = file.name + "|" + file.size;
-  div.innerHTML = `
-    <div class="name">${escapeHtml(file.name)}</div>
-    <div class="meta">
-      <span>${fmtSize(file.size)}</span>
-      <span class="badge queue">準備中</span>
-    </div>
-    <div class="bar"><div class="fill"></div></div>
-  `;
-  queueEl.appendChild(div);
-}
-
-function setRowState(file, state, percent) {
-  const row = queueEl.querySelector(`[data-file-key="${CSS.escape(file.name + '|' + file.size)}"]`);
-  if (!row) return;
-  if (state) {
-    const badge = row.querySelector(".badge");
-    badge.className = "badge " + (state.cls || "work");
-    badge.textContent = state.text;
-    if (state.cls === "done") row.classList.add("done");
-    if (state.cls === "error") row.classList.add("error");
+function refreshSplitQueue() {
+  const el = $("splitQueue");
+  if (state.splitFiles.length === 0) {
+    el.innerHTML = '<div style="font-style:italic">— 未有檔案</div>';
+    $("startBtn").disabled = true; return;
   }
-  if (typeof percent === "number") {
-    row.querySelector(".fill").style.width = Math.min(100, percent) + "%";
-  }
+  $("startBtn").disabled = false;
+  el.innerHTML = state.splitFiles.map(f =>
+    `<div class="queue-item"><span class="qname">${escapeHtml(f.name)}</span><span class="qsize">${fmtSize(f.size)}</span></div>`
+  ).join("");
 }
+refreshSplitQueue();
 
-startBtn.addEventListener("click", startSplit);
+$("startBtn").addEventListener("click", startSplit);
 
 async function startSplit() {
   if (state.splitFiles.length === 0) return;
-  startBtn.disabled = true;
-
+  $("startBtn").disabled = true; $("splitFileInput").disabled = true;
   const opts = {
-    chunkMb: parseFloat($("chunkSize").value) || 29.9,
-    copySmall: $("copySmall").checked,
-    verifyHash: $("verifyHash").checked,
+    chunkMb: parseFloat($("chunkMb").value) || 29.9,
+    copySmall: state.toggles.copy, verifyHash: state.toggles.hash,
   };
   if (opts.chunkMb >= 30) {
-    if (!confirm(`你揀咗 ${opts.chunkMb} MB ≥ 30 MB，多數 AI 平台會拒收。仲係要繼續？`)) {
-      startBtn.disabled = false;
-      return;
+    if (!confirm(`${opts.chunkMb} MB ≥ 30 MB，多數 AI 平台會拒收。仲係要繼續？`)) {
+      $("startBtn").disabled = false; $("splitFileInput").disabled = false; return;
     }
   }
-  logTo(logEl, `開始切割：${state.splitFiles.length} 個檔案，每片 ${opts.chunkMb} MB`);
-
-  const splitter = new Splitter(opts);
+  $("progressPanel").classList.remove("hidden");
+  $("resultPanel").classList.remove("hidden");
+  $("results").innerHTML = "";
+  logTo("splitLog", `開始切割 ${state.splitFiles.length} 個檔案，每片 ${opts.chunkMb} MB`);
   const results = [];
-
   for (let i = 0; i < state.splitFiles.length; i++) {
     const f = state.splitFiles[i];
-    setRowState(f, { cls: "work", text: "處理中" }, 0);
-    logTo(logEl, `[${i+1}/${state.splitFiles.length}] ${f.name}`);
-
-    const r = await splitter.splitOne(f, (cur, total) => {
-      const pct = total > 0 ? (cur * 100 / total) : 100;
-      setRowState(f, null, pct);
+    $("progressText").textContent = `[${i+1}/${state.splitFiles.length}] ${f.name}`;
+    logTo("splitLog", `[${i+1}/${state.splitFiles.length}] ${f.name} (${fmtSize(f.size)})`);
+    const r = await splitFile(f, opts, (cur, total) => {
+      const pct = total > 0 ? cur*100/total : 100;
+      $("progressFill").style.width = pct + "%";
     });
-
     results.push(r);
-
-    if (r.kind === "error") {
-      setRowState(f, { cls: "error", text: "失敗" }, 100);
-      logTo(logEl, `   失敗: ${r.error}`, "err");
-    } else if (r.kind === "skip") {
-      setRowState(f, { cls: "skip", text: "略過（細過 chunk）" }, 100);
-      logTo(logEl, "   略過（細過 chunk size）");
-    } else if (r.kind === "copy") {
-      setRowState(f, { cls: "done", text: "原檔複製" }, 100);
-      logTo(logEl, "   細檔案，已複製到 zip");
-    } else {
-      setRowState(f, { cls: "done", text: `${r.parts.length} 片` }, 100);
-      logTo(logEl, `   切咗 ${r.parts.length} 片，SHA256 ${r.manifest.sha256.slice(0,16)}…`, "ok");
-    }
+    if (r.kind === "error") logTo("splitLog", `   ✗ 失敗: ${r.error}`, "err");
+    else if (r.kind === "skip") logTo("splitLog", `   略過`);
+    else if (r.kind === "copy") logTo("splitLog", `   原檔複製`);
+    else logTo("splitLog", `   ✓ 切咗 ${r.parts.length} 片`, "ok");
+    renderResults(results);
   }
-
-  /* 整 summary */
-  const nSplit = results.filter(r => r.kind === "split").length;
-  const nCopy = results.filter(r => r.kind === "copy").length;
-  const nSkip = results.filter(r => r.kind === "skip").length;
-  const nFail = results.filter(r => r.kind === "error").length;
-
-  summaryEl.innerHTML = `
-    <div class="stat"><strong>${results.length}</strong><span>共處理</span></div>
-    <div class="stat" style="color:var(--green)"><strong>${nSplit}</strong><span>已切割</span></div>
-    <div class="stat"><strong>${nCopy}</strong><span>原檔複製</span></div>
-    <div class="stat"><strong>${nSkip}</strong><span>略過</span></div>
-    <div class="stat" style="color:var(--red)"><strong>${nFail}</strong><span>失敗</span></div>
-  `;
-
-  /* 下載連結 - 用 button + onclick 而唔係 <a download>，因為 iOS 唔可靠 */
-  downloadsEl.innerHTML = "";
-  window.__downloadStore = window.__downloadStore || {};
-  let dlIdCounter = 0;
-  for (const r of results) {
-    if (!r.packedBlob) continue;
-    const grp = document.createElement("div");
-    grp.className = "dl-group";
-    const sizeText = fmtSize(r.packedBlob.size);
-    
-    const titleDiv = document.createElement("div");
-    titleDiv.className = "title";
-    titleDiv.innerHTML = `${escapeHtml(r.name)} <span class="sub" style="color:var(--muted);font-weight:normal">— ${sizeText}</span>`;
-    grp.appendChild(titleDiv);
-    
-    const linksDiv = document.createElement("div");
-    linksDiv.className = "links";
-    grp.appendChild(linksDiv);
-    
-    /* 主下載：成個 zip */
-    const zipId = "dl_" + (++dlIdCounter);
-    window.__downloadStore[zipId] = { blob: r.packedBlob, name: r.zipName };
-    const zipBtn = document.createElement("button");
-    zipBtn.className = "dl bulk";
-    zipBtn.type = "button";
-    zipBtn.textContent = "⬇ 下載 / 分享 .zip（推薦）";
-    zipBtn.addEventListener("click", () => {
-      const item = window.__downloadStore[zipId];
-      window.__iosDownload(item.blob, item.name);
-    });
-    linksDiv.appendChild(zipBtn);
-    
-    /* 散裝下載：每個 part 一個 button */
-    if (r.parts && r.parts.length > 0) {
-      for (const p of r.parts) {
-        const partId = "dl_" + (++dlIdCounter);
-        window.__downloadStore[partId] = { blob: p.blob, name: p.name };
-        const btn = document.createElement("button");
-        btn.className = "dl";
-        btn.type = "button";
-        btn.textContent = p.name;
-        btn.addEventListener("click", () => {
-          const item = window.__downloadStore[partId];
-          window.__iosDownload(item.blob, item.name);
-        });
-        linksDiv.appendChild(btn);
-      }
-      const manifestBlob = new Blob([JSON.stringify(r.manifest, null, 2)], {type:"application/json"});
-      const mId = "dl_" + (++dlIdCounter);
-      window.__downloadStore[mId] = { blob: manifestBlob, name: "manifest.json" };
-      const mBtn = document.createElement("button");
-      mBtn.className = "dl";
-      mBtn.type = "button";
-      mBtn.textContent = "manifest.json";
-      mBtn.addEventListener("click", () => {
-        const item = window.__downloadStore[mId];
-        window.__iosDownload(item.blob, item.name);
-      });
-      linksDiv.appendChild(mBtn);
-    }
-    
-    downloadsEl.appendChild(grp);
-  }
-
-  resultPanel.classList.remove("hidden");
-  resultPanel.scrollIntoView({behavior: "smooth", block: "start"});
-  logTo(logEl, `完成：${nSplit} 切，${nCopy} 複製，${nSkip} 略，${nFail} 失敗。`, "ok");
-  startBtn.disabled = false;
+  $("progressText").textContent = "完成！";
+  $("startBtn").disabled = false; $("splitFileInput").disabled = false;
+  $("splitFileInput").value = "";
+  state.splitFiles = []; refreshSplitQueue();
+  logTo("splitLog", "全部完成", "ok");
 }
 
-/* ---------- 合併 UI ---------- */
-const mergeDropZone = $("mergeDropZone");
-const mergeFileInput = $("mergeFileInput");
-const mergeQueueEl = $("mergeQueue");
-const mergeCountEl = $("mergeCount");
-const mergeBtn = $("mergeBtn");
-const mergeLog = $("mergeLog");
-
-mergeDropZone.addEventListener("click", () => mergeFileInput.click());
-mergeFileInput.addEventListener("change", e => {
-  addMergeFiles(Array.from(e.target.files));
-  mergeFileInput.value = "";
-});
-["dragenter","dragover"].forEach(evt => {
-  mergeDropZone.addEventListener(evt, e => { e.preventDefault(); mergeDropZone.classList.add("hover"); });
-});
-["dragleave","drop"].forEach(evt => {
-  mergeDropZone.addEventListener(evt, e => { e.preventDefault(); mergeDropZone.classList.remove("hover"); });
-});
-mergeDropZone.addEventListener("drop", e => {
-  if (e.dataTransfer && e.dataTransfer.files) {
-    addMergeFiles(Array.from(e.dataTransfer.files));
+function renderResults(results) {
+  const el = $("results"); el.innerHTML = "";
+  for (const r of results) {
+    const div = document.createElement("div");
+    div.className = "result-item";
+    const meta = r.kind === "error"
+      ? `<div class="rmeta err">失敗: ${escapeHtml(r.error)}</div>`
+      : r.kind === "skip" ? `<div class="rmeta">略過 (${fmtSize(r.size)})</div>`
+      : r.kind === "copy" ? `<div class="rmeta ok">原檔複製 (${fmtSize(r.size)})</div>`
+      : `<div class="rmeta ok">已切 ${r.parts.length} 片 (${fmtSize(r.size)})</div>`;
+    div.innerHTML = `<div class="rname">${escapeHtml(r.name)}</div>${meta}`;
+    if (r.packedBlob) {
+      const dlBox = document.createElement("div");
+      dlBox.className = "dl-buttons";
+      const mainBtn = document.createElement("button");
+      mainBtn.className = "dl-btn primary";
+      mainBtn.textContent = `⬇ 下載 ${r.zipName}`;
+      mainBtn.addEventListener("click", () => iosDownload(r.packedBlob, r.zipName));
+      dlBox.appendChild(mainBtn);
+      if (r.parts) {
+        for (const p of r.parts) {
+          const btn = document.createElement("button");
+          btn.className = "dl-btn"; btn.textContent = p.name;
+          btn.addEventListener("click", () => iosDownload(p.blob, p.name));
+          dlBox.appendChild(btn);
+        }
+        if (r.manifest) {
+          const mBtn = document.createElement("button");
+          mBtn.className = "dl-btn"; mBtn.textContent = "manifest.json";
+          mBtn.addEventListener("click", () => {
+            const blob = new Blob([JSON.stringify(r.manifest, null, 2)], {type:"application/json"});
+            iosDownload(blob, "manifest.json");
+          });
+          dlBox.appendChild(mBtn);
+        }
+      }
+      div.appendChild(dlBox);
+    }
+    el.appendChild(div);
   }
-});
+}
 
-$("mergeClearBtn").addEventListener("click", () => {
-  state.mergeFiles = [];
-  mergeQueueEl.innerHTML = "";
-  mergeCountEl.textContent = "";
-  mergeBtn.disabled = true;
-});
-
-function addMergeFiles(files) {
-  if (!files || files.length === 0) return;
+$("mergeFileInput").addEventListener("change", (e) => {
+  const files = Array.from(e.target.files);
+  if (files.length === 0) return;
   const seen = new Set(state.mergeFiles.map(f => f.name + "|" + f.size));
   let added = 0;
   for (const f of files) {
     const key = f.name + "|" + f.size;
     if (seen.has(key)) continue;
-    seen.add(key);
-    state.mergeFiles.push(f);
-    added++;
-    const div = document.createElement("div");
-    div.className = "file";
-    div.innerHTML = `
-      <div class="name">${escapeHtml(f.name)}</div>
-      <div class="meta"><span>${fmtSize(f.size)}</span></div>
-    `;
-    mergeQueueEl.appendChild(div);
+    seen.add(key); state.mergeFiles.push(f); added++;
   }
-  mergeCountEl.textContent = `共 ${state.mergeFiles.length} 個檔案`;
-  mergeBtn.disabled = state.mergeFiles.length === 0;
-  logTo(mergeLog, `加入 ${added} 個檔案。`);
-}
-
-mergeBtn.addEventListener("click", async () => {
-  mergeBtn.disabled = true;
-  logTo(mergeLog, "分析輸入中…");
-  let groups;
-  try {
-    groups = await Merger.groupInputs(state.mergeFiles);
-  } catch (e) {
-    logTo(mergeLog, "分析失敗：" + e.message, "err");
-    mergeBtn.disabled = false;
-    return;
-  }
-
-  if (groups.length === 0) {
-    logTo(mergeLog, "搵唔到任何完整嘅切割組。請揀埋 manifest.json + 所有 .partXXX，或者揀返切割產生嘅 .zip。", "err");
-    mergeBtn.disabled = false;
-    return;
-  }
-
-  /* 重置 queue 顯示 */
-  mergeQueueEl.innerHTML = "";
-  const rows = [];
-  for (const g of groups) {
-    const div = document.createElement("div");
-    div.className = "file";
-    const title = g.error ? "（錯誤）" : g.manifest.original_filename;
-    div.innerHTML = `
-      <div class="name">${escapeHtml(title)}</div>
-      <div class="meta">
-        <span>${g.manifest ? fmtSize(g.manifest.original_size) : ""}</span>
-        <span class="badge queue">等緊</span>
-      </div>
-      <div class="bar"><div class="fill"></div></div>
-    `;
-    mergeQueueEl.appendChild(div);
-    rows.push(div);
-  }
-
-  const opts = { verifyHash: $("verifyHash").checked };
-  let nOk = 0, nFail = 0;
-
-  for (let i = 0; i < groups.length; i++) {
-    const g = groups[i];
-    const row = rows[i];
-    const setBadge = (cls, text) => {
-      const b = row.querySelector(".badge");
-      b.className = "badge " + cls; b.textContent = text;
-    };
-    if (g.error) {
-      setBadge("error", "失敗");
-      row.querySelector(".fill").style.width = "100%";
-      row.classList.add("error");
-      logTo(mergeLog, "失敗: " + g.error, "err");
-      nFail++; continue;
-    }
-
-    setBadge("work", "合併中");
-    logTo(mergeLog, `合併: ${g.manifest.original_filename}`);
-    const res = await Merger.mergeOne(g, opts, (cur, total) => {
-      row.querySelector(".fill").style.width = (total > 0 ? cur * 100 / total : 100) + "%";
-    });
-
-    if (res.ok) {
-      setBadge("done", res.sha256 ? "完整" : "已合併");
-      row.classList.add("done");
-      row.querySelector(".fill").style.width = "100%";
-      const mergeId = "merge_" + Date.now() + "_" + Math.random();
-      window.__downloadStore = window.__downloadStore || {};
-      window.__downloadStore[mergeId] = { blob: res.blob, name: res.name };
-      const dl = document.createElement("button");
-      dl.className = "dl bulk";
-      dl.type = "button";
-      dl.textContent = `⬇ 下載 / 分享 ${res.name} (${fmtSize(res.size)})`;
-      dl.style.marginTop = "8px"; dl.style.display = "inline-block";
-      dl.addEventListener("click", () => {
-        const item = window.__downloadStore[mergeId];
-        window.__iosDownload(item.blob, item.name);
-      });
-      row.appendChild(dl);
-      logTo(mergeLog, `   OK，${fmtSize(res.size)}${res.sha256 ? "，SHA256 ✓" : ""}`, "ok");
-      nOk++;
-    } else {
-      setBadge("error", "失敗");
-      row.classList.add("error");
-      row.querySelector(".fill").style.width = "100%";
-      logTo(mergeLog, "   失敗: " + res.error, "err");
-      nFail++;
-    }
-  }
-  logTo(mergeLog, `完成：${nOk} 成功，${nFail} 失敗。`, "ok");
-  mergeBtn.disabled = false;
+  refreshMergeQueue();
+  logTo("mergeLog", `加入 ${added} 個檔案`);
 });
 
-logTo(logEl, `檔案切割器 v${VERSION} 已載入。完全喺你部機本地運行。`);
+function refreshMergeQueue() {
+  const el = $("mergeQueue");
+  if (state.mergeFiles.length === 0) {
+    el.innerHTML = '<div style="font-style:italic">— 未有檔案</div>';
+    $("mergeBtn").disabled = true; return;
+  }
+  $("mergeBtn").disabled = false;
+  el.innerHTML = state.mergeFiles.map(f =>
+    `<div class="queue-item"><span class="qname">${escapeHtml(f.name)}</span><span class="qsize">${fmtSize(f.size)}</span></div>`
+  ).join("");
+}
+refreshMergeQueue();
 
+$("mergeBtn").addEventListener("click", async () => {
+  $("mergeBtn").disabled = true; $("mergeFileInput").disabled = true;
+  $("mergeResultPanel").classList.remove("hidden");
+  $("mergeResults").innerHTML = "";
+  logTo("mergeLog", "分析輸入...");
+  let groups;
+  try { groups = await groupMergeInputs(state.mergeFiles); }
+  catch (e) {
+    logTo("mergeLog", "分析失敗: " + e.message, "err");
+    $("mergeBtn").disabled = false; $("mergeFileInput").disabled = false; return;
+  }
+  if (groups.length === 0) {
+    logTo("mergeLog", "搵唔到任何完整切割組", "err");
+    $("mergeBtn").disabled = false; $("mergeFileInput").disabled = false; return;
+  }
+  for (const g of groups) {
+    if (g.error) {
+      logTo("mergeLog", "失敗: " + g.error, "err");
+      const div = document.createElement("div");
+      div.className = "result-item";
+      div.innerHTML = `<div class="rname">（錯誤）</div><div class="rmeta err">${escapeHtml(g.error)}</div>`;
+      $("mergeResults").appendChild(div); continue;
+    }
+    logTo("mergeLog", `合併: ${g.manifest.original_filename}`);
+    const r = await mergeOne(g, { verifyHash: state.toggles.hash }, () => {});
+    const div = document.createElement("div");
+    div.className = "result-item";
+    if (r.ok) {
+      div.innerHTML = `<div class="rname">${escapeHtml(r.name)}</div><div class="rmeta ok">合併成功 ${fmtSize(r.blob.size)}${r.sha256 ? " · SHA256 ✓" : ""}</div>`;
+      const dlBtn = document.createElement("button");
+      dlBtn.className = "dl-btn primary";
+      dlBtn.textContent = `⬇ 下載 ${r.name}`;
+      dlBtn.addEventListener("click", () => iosDownload(r.blob, r.name));
+      div.appendChild(dlBtn);
+      logTo("mergeLog", `   ✓ ${fmtSize(r.blob.size)}`, "ok");
+    } else {
+      div.innerHTML = `<div class="rname">${escapeHtml(r.name)}</div><div class="rmeta err">失敗: ${escapeHtml(r.error)}</div>`;
+      logTo("mergeLog", `   ✗ ${r.error}`, "err");
+    }
+    $("mergeResults").appendChild(div);
+  }
+  $("mergeBtn").disabled = false; $("mergeFileInput").disabled = false;
+  $("mergeFileInput").value = "";
+  state.mergeFiles = []; refreshMergeQueue();
+});
+
+logTo("splitLog", "App 已載入。");
+logTo("mergeLog", "App 已載入。");
 </script>
 
 </body>

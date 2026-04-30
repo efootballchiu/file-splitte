@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="zh-HK">
 <head>
 <meta charset="UTF-8">
@@ -45,171 +46,177 @@
   }
   header p { color: var(--muted); margin: 0; font-size: 14px; }
 
-  .tabs {
-    display: flex; gap: 4px; margin-bottom: 16px;
-    background: var(--panel); border-radius: 12px; padding: 4px;
-    border: 1px solid var(--border);
-  }
-  .tab {
-    flex: 1; padding: 10px; border: 0; background: transparent;
-    color: var(--muted); font-size: 15px; font-weight: 600;
-    border-radius: 8px; cursor: pointer; font-family: inherit;
-    transition: all .15s ease;
-  }
-  .tab.active {
-    background: var(--panel-2); color: var(--text);
-    box-shadow: inset 0 0 0 1px var(--border);
-  }
+.tabs {
+display: flex; gap: 4px; margin-bottom: 16px;
+background: var(–panel); border-radius: 12px; padding: 4px;
+border: 1px solid var(–border);
+}
+.tab {
+flex: 1; padding: 10px; border: 0; background: transparent;
+color: var(–muted); font-size: 15px; font-weight: 600;
+border-radius: 8px; cursor: pointer; font-family: inherit;
+transition: all .15s ease;
+}
+.tab.active {
+background: var(–panel-2); color: var(–text);
+box-shadow: inset 0 0 0 1px var(–border);
+}
 
-  .panel {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 14px; padding: 16px; margin-bottom: 14px;
-    box-shadow: var(--shadow);
-  }
-  .panel h2 {
-    font-size: 14px; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--muted); margin: 0 0 12px;
-  }
+.panel {
+background: var(–panel); border: 1px solid var(–border);
+border-radius: 14px; padding: 16px; margin-bottom: 14px;
+box-shadow: var(–shadow);
+}
+.panel h2 {
+font-size: 14px; text-transform: uppercase; letter-spacing: .08em;
+color: var(–muted); margin: 0 0 12px;
+}
 
-  .drop {
-    border: 2px dashed var(--border); border-radius: 14px;
-    padding: 28px 16px; text-align: center; cursor: pointer;
-    transition: all .15s ease; background: var(--panel-2);
-  }
-  .drop.hover { border-color: var(--accent); background: rgba(255,184,77,.06); }
-  .drop .icon { font-size: 36px; margin-bottom: 8px; }
-  .drop .big { font-size: 17px; font-weight: 600; }
-  .drop .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.drop {
+border: 2px dashed var(–border); border-radius: 14px;
+padding: 28px 16px; text-align: center; cursor: pointer;
+transition: all .15s ease; background: var(–panel-2);
+width: 100%; display: block; font-family: inherit; font-size: inherit;
+color: inherit; appearance: none; -webkit-appearance: none;
+}
+button.drop:active { background: rgba(255,184,77,.04); }
+.drop.hover { border-color: var(–accent); background: rgba(255,184,77,.06); }
+.drop .icon { font-size: 36px; margin-bottom: 8px; }
+.drop .big { font-size: 17px; font-weight: 600; }
+.drop .sub { color: var(–muted); font-size: 13px; margin-top: 4px; }
 
-  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .row label { color: var(--muted); font-size: 14px; min-width: 100px; }
+.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.row label { color: var(–muted); font-size: 14px; min-width: 100px; }
 
-  input[type="number"] {
-    background: var(--panel-2); color: var(--text);
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 8px 10px; font-size: 16px; width: 110px;
-    font-family: inherit;
-  }
-  input[type="number"]:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+input[type=“number”] {
+background: var(–panel-2); color: var(–text);
+border: 1px solid var(–border); border-radius: 8px;
+padding: 8px 10px; font-size: 16px; width: 110px;
+font-family: inherit;
+}
+input[type=“number”]:focus { outline: 2px solid var(–accent); outline-offset: -1px; }
 
-  .toggle {
-    display: flex; align-items: center; gap: 10px;
-    padding: 8px 0; cursor: pointer; user-select: none;
-  }
-  .toggle input { appearance: none; width: 40px; height: 24px;
-    background: var(--panel-2); border: 1px solid var(--border);
-    border-radius: 999px; position: relative; cursor: pointer;
-    transition: background .15s; flex-shrink: 0;
-  }
-  .toggle input:checked { background: var(--accent); border-color: var(--accent); }
-  .toggle input::after {
-    content: ""; position: absolute; top: 2px; left: 2px;
-    width: 18px; height: 18px; border-radius: 50%;
-    background: white; transition: transform .15s;
-  }
-  .toggle input:checked::after { transform: translateX(16px); }
-  .toggle span { font-size: 14px; color: var(--text); }
-  .toggle small { display: block; color: var(--muted); font-size: 12px; }
+.toggle {
+display: flex; align-items: center; gap: 10px;
+padding: 8px 0; cursor: pointer; user-select: none;
+}
+.toggle input { appearance: none; width: 40px; height: 24px;
+background: var(–panel-2); border: 1px solid var(–border);
+border-radius: 999px; position: relative; cursor: pointer;
+transition: background .15s; flex-shrink: 0;
+}
+.toggle input:checked { background: var(–accent); border-color: var(–accent); }
+.toggle input::after {
+content: “”; position: absolute; top: 2px; left: 2px;
+width: 18px; height: 18px; border-radius: 50%;
+background: white; transition: transform .15s;
+}
+.toggle input:checked::after { transform: translateX(16px); }
+.toggle span { font-size: 14px; color: var(–text); }
+.toggle small { display: block; color: var(–muted); font-size: 12px; }
 
-  button.primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: #1a1410; border: 0; border-radius: 10px;
-    padding: 14px 20px; font-size: 16px; font-weight: 700;
-    cursor: pointer; width: 100%; font-family: inherit;
-    box-shadow: 0 4px 12px rgba(255,120,73,.3);
-  }
-  button.primary:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
-  button.primary:active { transform: translateY(1px); }
-  button.ghost {
-    background: var(--panel-2); color: var(--text);
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 8px 14px; font-size: 14px; cursor: pointer;
-    font-family: inherit;
-  }
+button.primary {
+background: linear-gradient(135deg, var(–accent), var(–accent-2));
+color: #1a1410; border: 0; border-radius: 10px;
+padding: 14px 20px; font-size: 16px; font-weight: 700;
+cursor: pointer; width: 100%; font-family: inherit;
+box-shadow: 0 4px 12px rgba(255,120,73,.3);
+}
+button.primary:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
+button.primary:active { transform: translateY(1px); }
+button.ghost {
+background: var(–panel-2); color: var(–text);
+border: 1px solid var(–border); border-radius: 8px;
+padding: 8px 14px; font-size: 14px; cursor: pointer;
+font-family: inherit;
+}
 
-  .queue { display: flex; flex-direction: column; gap: 8px; }
-  .queue:empty::before {
-    content: "—  未有檔案"; color: var(--muted);
-    font-size: 13px; font-style: italic;
-  }
-  .file {
-    background: var(--panel-2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px 12px;
-  }
-  .file .name {
-    font-size: 14px; font-weight: 600;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .file .meta {
-    font-size: 12px; color: var(--muted); margin-top: 2px;
-    display: flex; gap: 10px; flex-wrap: wrap;
-  }
-  .file .bar {
-    margin-top: 8px; height: 5px; background: var(--bg);
-    border-radius: 99px; overflow: hidden;
-  }
-  .file .fill {
-    height: 100%; width: 0;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    transition: width .15s ease;
-  }
-  .file.done .fill { background: var(--green); }
-  .file.error .fill { background: var(--red); }
-  .badge {
-    display: inline-block; padding: 1px 7px; border-radius: 99px;
-    font-size: 11px; font-weight: 600;
-  }
-  .badge.queue { background: var(--panel); color: var(--muted); }
-  .badge.work { background: rgba(255,184,77,.15); color: var(--accent); }
-  .badge.done { background: rgba(74,222,128,.15); color: var(--green); }
-  .badge.skip { background: rgba(138,147,166,.15); color: var(--muted); }
-  .badge.error { background: rgba(248,113,113,.15); color: var(--red); }
+.queue { display: flex; flex-direction: column; gap: 8px; }
+.queue:empty::before {
+content: “—  未有檔案”; color: var(–muted);
+font-size: 13px; font-style: italic;
+}
+.file {
+background: var(–panel-2); border: 1px solid var(–border);
+border-radius: 10px; padding: 10px 12px;
+}
+.file .name {
+font-size: 14px; font-weight: 600;
+overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.file .meta {
+font-size: 12px; color: var(–muted); margin-top: 2px;
+display: flex; gap: 10px; flex-wrap: wrap;
+}
+.file .bar {
+margin-top: 8px; height: 5px; background: var(–bg);
+border-radius: 99px; overflow: hidden;
+}
+.file .fill {
+height: 100%; width: 0;
+background: linear-gradient(90deg, var(–accent), var(–accent-2));
+transition: width .15s ease;
+}
+.file.done .fill { background: var(–green); }
+.file.error .fill { background: var(–red); }
+.badge {
+display: inline-block; padding: 1px 7px; border-radius: 99px;
+font-size: 11px; font-weight: 600;
+}
+.badge.queue { background: var(–panel); color: var(–muted); }
+.badge.work { background: rgba(255,184,77,.15); color: var(–accent); }
+.badge.done { background: rgba(74,222,128,.15); color: var(–green); }
+.badge.skip { background: rgba(138,147,166,.15); color: var(–muted); }
+.badge.error { background: rgba(248,113,113,.15); color: var(–red); }
 
-  .log {
-    background: #0a0c10; border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 12px; color: var(--muted);
-    max-height: 200px; overflow-y: auto;
-    white-space: pre-wrap; word-break: break-all;
-  }
-  .log .ok { color: var(--green); }
-  .log .err { color: var(--red); }
+.log {
+background: #0a0c10; border: 1px solid var(–border);
+border-radius: 10px; padding: 10px;
+font-family: ui-monospace, “SF Mono”, Menlo, monospace;
+font-size: 12px; color: var(–muted);
+max-height: 200px; overflow-y: auto;
+white-space: pre-wrap; word-break: break-all;
+}
+.log .ok { color: var(–green); }
+.log .err { color: var(–red); }
 
-  .results {
-    background: var(--panel-2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 12px;
-  }
-  .results .summary { display: flex; gap: 16px; flex-wrap: wrap; }
-  .results .stat strong { font-size: 22px; display: block; }
-  .results .stat span { font-size: 12px; color: var(--muted); }
+.results {
+background: var(–panel-2); border: 1px solid var(–border);
+border-radius: 10px; padding: 12px;
+}
+.results .summary { display: flex; gap: 16px; flex-wrap: wrap; }
+.results .stat strong { font-size: 22px; display: block; }
+.results .stat span { font-size: 12px; color: var(–muted); }
 
-  .download-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
-  .dl-group {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 10px;
-  }
-  .dl-group .title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .dl-group .links { display: flex; flex-wrap: wrap; gap: 6px; }
-  .dl {
-    display: inline-flex; align-items: center; gap: 4px;
-    background: var(--panel); border: 1px solid var(--border);
-    color: var(--accent); padding: 6px 10px; border-radius: 6px;
-    font-size: 12px; text-decoration: none; cursor: pointer;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  }
-  .dl:active { background: var(--panel-2); }
-  .dl.bulk { color: var(--text); font-weight: 600; }
+.download-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.dl-group {
+background: var(–bg); border: 1px solid var(–border);
+border-radius: 8px; padding: 10px;
+}
+.dl-group .title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.dl-group .links { display: flex; flex-wrap: wrap; gap: 6px; }
+.dl {
+display: inline-flex; align-items: center; gap: 4px;
+background: var(–panel); border: 1px solid var(–border);
+color: var(–accent); padding: 6px 10px; border-radius: 6px;
+font-size: 12px; text-decoration: none; cursor: pointer;
+font-family: ui-monospace, “SF Mono”, Menlo, monospace;
+appearance: none; -webkit-appearance: none;
+}
+button.dl { font-family: ui-monospace, “SF Mono”, Menlo, monospace; }
+.dl:active { background: var(–panel-2); }
+.dl.bulk { color: var(–text); font-weight: 600; }
 
-  .hidden { display: none !important; }
+.hidden { display: none !important; }
 
-  .hint {
-    background: rgba(255,184,77,.08); border: 1px solid rgba(255,184,77,.25);
-    border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.5;
-    color: #ffd9a8; margin-bottom: 12px;
-  }
-  .hint strong { color: var(--accent); }
+.hint {
+background: rgba(255,184,77,.08); border: 1px solid rgba(255,184,77,.25);
+border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.5;
+color: #ffd9a8; margin-bottom: 12px;
+}
+.hint strong { color: var(–accent); }
 </style>
+
 </head>
 <body>
 <div class="wrap">
@@ -225,16 +232,17 @@
 </div>
 
 <!-- ============== 切割 tab ============== -->
+
 <section id="tab-split">
 
   <div class="panel">
     <h2>1. 揀檔案</h2>
-    <div class="drop" id="dropZone" onclick="document.getElementById('fileInput').click()">
+    <button type="button" class="drop" id="dropZone">
       <div class="icon">📁</div>
       <div class="big">㩒呢度揀檔案</div>
       <div class="sub">iPad / Mac 仲可以拖檔案入嚟</div>
-    </div>
-    <input type="file" id="fileInput" multiple style="position:absolute;left:-9999px;opacity:0">
+    </button>
+    <input type="file" id="fileInput" multiple style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <div class="row" style="margin-top:10px">
       <button class="ghost" id="clearBtn">清空 queue</button>
       <span class="sub" id="queueCount" style="color:var(--muted);font-size:13px"></span>
@@ -287,6 +295,7 @@
 </section>
 
 <!-- ============== 合併 tab ============== -->
+
 <section id="tab-merge" class="hidden">
   <div class="hint">
     <strong>合併步驟：</strong><br>
@@ -296,12 +305,12 @@
 
   <div class="panel">
     <h2>揀返切割產物</h2>
-    <div class="drop" id="mergeDropZone" onclick="document.getElementById('mergeFileInput').click()">
+    <button type="button" class="drop" id="mergeDropZone">
       <div class="icon">🧩</div>
       <div class="big">㩒呢度揀檔案</div>
       <div class="sub">揀 .zip / 或者揀 manifest.json + 所有 .partXXX</div>
-    </div>
-    <input type="file" id="mergeFileInput" multiple style="position:absolute;left:-9999px;opacity:0">
+    </button>
+    <input type="file" id="mergeFileInput" multiple style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <div class="row" style="margin-top:10px">
       <button class="ghost" id="mergeClearBtn">清空</button>
       <span class="sub" id="mergeCount" style="color:var(--muted);font-size:13px"></span>
@@ -331,6 +340,58 @@
    ========================================================================= */
 
 "use strict";
+
+/* ----- iOS-friendly download helper -----
+   iOS Firefox/Safari 對 <a download> 唔可靠，要多重 fallback */
+window.__iosDownload = function(blob, filename) {
+  console.log('[download] start', filename, 'size=', blob.size);
+  
+  /* Fallback 1: 用 navigator.share 如果可用（最 iOS-native） */
+  if (navigator.share && navigator.canShare) {
+    try {
+      const file = new File([blob], filename, { type: blob.type || 'application/octet-stream' });
+      if (navigator.canShare({ files: [file] })) {
+        return navigator.share({ files: [file], title: filename }).catch(e => {
+          console.log('share cancelled or failed:', e);
+          /* fall through to next method */
+          window.__fallbackDownload(blob, filename);
+        });
+      }
+    } catch (e) {
+      console.log('share API failed:', e);
+    }
+  }
+  window.__fallbackDownload(blob, filename);
+};
+
+window.__fallbackDownload = function(blob, filename) {
+  /* 嘗試標準 anchor click */
+  try {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1000);
+    return;
+  } catch (e) {
+    console.log('anchor download failed:', e);
+  }
+  
+  /* 最終 fallback：開個新 tab 顯示個檔案 */
+  try {
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  } catch (e) {
+    alert('下載失敗：' + e.message);
+  }
+};
+
 
 const VERSION = "1.0.0";
 const MANIFEST_NAME = "manifest.json";
@@ -1128,31 +1189,67 @@ async function startSplit() {
     <div class="stat" style="color:var(--red)"><strong>${nFail}</strong><span>失敗</span></div>
   `;
 
-  /* 下載連結 */
+  /* 下載連結 - 用 button + onclick 而唔係 <a download>，因為 iOS 唔可靠 */
   downloadsEl.innerHTML = "";
+  window.__downloadStore = window.__downloadStore || {};
+  let dlIdCounter = 0;
   for (const r of results) {
     if (!r.packedBlob) continue;
     const grp = document.createElement("div");
     grp.className = "dl-group";
-    const url = URL.createObjectURL(r.packedBlob);
     const sizeText = fmtSize(r.packedBlob.size);
-    let inner = `
-      <div class="title">${escapeHtml(r.name)} <span class="sub" style="color:var(--muted);font-weight:normal">— ${sizeText}</span></div>
-      <div class="links">
-        <a class="dl bulk" href="${url}" download="${escapeHtml(r.zipName)}">⬇ 下載成 .zip（推薦）</a>
-    `;
-    /* 散裝下載：每個 part 一個 link */
+    
+    const titleDiv = document.createElement("div");
+    titleDiv.className = "title";
+    titleDiv.innerHTML = `${escapeHtml(r.name)} <span class="sub" style="color:var(--muted);font-weight:normal">— ${sizeText}</span>`;
+    grp.appendChild(titleDiv);
+    
+    const linksDiv = document.createElement("div");
+    linksDiv.className = "links";
+    grp.appendChild(linksDiv);
+    
+    /* 主下載：成個 zip */
+    const zipId = "dl_" + (++dlIdCounter);
+    window.__downloadStore[zipId] = { blob: r.packedBlob, name: r.zipName };
+    const zipBtn = document.createElement("button");
+    zipBtn.className = "dl bulk";
+    zipBtn.type = "button";
+    zipBtn.textContent = "⬇ 下載 / 分享 .zip（推薦）";
+    zipBtn.addEventListener("click", () => {
+      const item = window.__downloadStore[zipId];
+      window.__iosDownload(item.blob, item.name);
+    });
+    linksDiv.appendChild(zipBtn);
+    
+    /* 散裝下載：每個 part 一個 button */
     if (r.parts && r.parts.length > 0) {
       for (const p of r.parts) {
-        const purl = URL.createObjectURL(p.blob);
-        inner += `<a class="dl" href="${purl}" download="${escapeHtml(p.name)}">${escapeHtml(p.name)}</a>`;
+        const partId = "dl_" + (++dlIdCounter);
+        window.__downloadStore[partId] = { blob: p.blob, name: p.name };
+        const btn = document.createElement("button");
+        btn.className = "dl";
+        btn.type = "button";
+        btn.textContent = p.name;
+        btn.addEventListener("click", () => {
+          const item = window.__downloadStore[partId];
+          window.__iosDownload(item.blob, item.name);
+        });
+        linksDiv.appendChild(btn);
       }
       const manifestBlob = new Blob([JSON.stringify(r.manifest, null, 2)], {type:"application/json"});
-      const murl = URL.createObjectURL(manifestBlob);
-      inner += `<a class="dl" href="${murl}" download="manifest.json">manifest.json</a>`;
+      const mId = "dl_" + (++dlIdCounter);
+      window.__downloadStore[mId] = { blob: manifestBlob, name: "manifest.json" };
+      const mBtn = document.createElement("button");
+      mBtn.className = "dl";
+      mBtn.type = "button";
+      mBtn.textContent = "manifest.json";
+      mBtn.addEventListener("click", () => {
+        const item = window.__downloadStore[mId];
+        window.__iosDownload(item.blob, item.name);
+      });
+      linksDiv.appendChild(mBtn);
     }
-    inner += `</div>`;
-    grp.innerHTML = inner;
+    
     downloadsEl.appendChild(grp);
   }
 
@@ -1282,11 +1379,18 @@ mergeBtn.addEventListener("click", async () => {
       setBadge("done", res.sha256 ? "完整" : "已合併");
       row.classList.add("done");
       row.querySelector(".fill").style.width = "100%";
-      const url = URL.createObjectURL(res.blob);
-      const dl = document.createElement("a");
-      dl.className = "dl bulk"; dl.href = url; dl.download = res.name;
-      dl.textContent = `⬇ 下載 ${res.name} (${fmtSize(res.size)})`;
+      const mergeId = "merge_" + Date.now() + "_" + Math.random();
+      window.__downloadStore = window.__downloadStore || {};
+      window.__downloadStore[mergeId] = { blob: res.blob, name: res.name };
+      const dl = document.createElement("button");
+      dl.className = "dl bulk";
+      dl.type = "button";
+      dl.textContent = `⬇ 下載 / 分享 ${res.name} (${fmtSize(res.size)})`;
       dl.style.marginTop = "8px"; dl.style.display = "inline-block";
+      dl.addEventListener("click", () => {
+        const item = window.__downloadStore[mergeId];
+        window.__iosDownload(item.blob, item.name);
+      });
       row.appendChild(dl);
       logTo(mergeLog, `   OK，${fmtSize(res.size)}${res.sha256 ? "，SHA256 ✓" : ""}`, "ok");
       nOk++;
@@ -1305,5 +1409,6 @@ mergeBtn.addEventListener("click", async () => {
 logTo(logEl, `檔案切割器 v${VERSION} 已載入。完全喺你部機本地運行。`);
 
 </script>
+
 </body>
 </html>

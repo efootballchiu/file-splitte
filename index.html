@@ -18,7 +18,7 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body {
   margin: 0; padding: 0; min-height: 100vh;
-  background: radial-gradient(ellipse at top, #1c2230 0%, var(--bg) 60%);
+  background: #0f1115;
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Helvetica Neue", sans-serif;
   font-size: 16px; -webkit-font-smoothing: antialiased;
@@ -30,9 +30,8 @@ body {
 header { padding: 12px 4px 20px; }
 h1 {
   font-size: 28px; margin: 0 0 6px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffb84d;
+  font-weight: 800;
 }
 header p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.5; }
 
@@ -71,10 +70,11 @@ display: block; width: 100%; max-width: 320px; margin: 0 auto;
 font-size: 14px; color: var(–text);
 }
 .file-picker input[type=“file”]::-webkit-file-upload-button {
-background: linear-gradient(135deg, var(–accent), var(–accent-2));
+background: #ffb84d;
 color: #1a1410; border: 0; padding: 10px 18px; border-radius: 8px;
 font-weight: 700; cursor: pointer; font-family: inherit;
 font-size: 14px; margin-right: 10px;
+-webkit-appearance: none; appearance: none;
 }
 
 .queue { font-size: 13px; color: var(–muted); padding: 4px 0; }
@@ -89,7 +89,7 @@ align-items: center; gap: 8px;
 
 .btn-primary {
 width: 100%; padding: 14px; font-size: 16px; font-weight: 700;
-background: linear-gradient(135deg, var(–accent), var(–accent-2));
+background: #ffb84d;
 color: #1a1410; border: 0; border-radius: 8px;
 cursor: pointer; font-family: inherit;
 appearance: none; -webkit-appearance: none;
@@ -141,7 +141,7 @@ border: 1px solid var(–border);
 }
 .progress-fill {
 height: 100%; width: 0;
-background: linear-gradient(90deg, var(–accent), var(–accent-2));
+background: #ffb84d;
 transition: width 0.2s ease;
 }
 
@@ -163,7 +163,7 @@ font-family: ui-monospace, “SF Mono”, Menlo, monospace;
 cursor: pointer;
 }
 .dl-btn.primary {
-background: linear-gradient(135deg, var(–accent), var(–accent-2));
+background: #ffb84d;
 color: #1a1410; font-weight: 700; border-color: transparent;
 }
 

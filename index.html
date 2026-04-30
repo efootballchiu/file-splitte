@@ -75,11 +75,19 @@ color: var(–muted); margin: 0 0 12px;
 .drop {
 border: 2px dashed var(–border); border-radius: 14px;
 padding: 28px 16px; text-align: center; cursor: pointer;
-transition: all .15s ease; background: var(–panel-2);
-width: 100%; display: block; font-family: inherit; font-size: inherit;
-color: inherit; appearance: none; -webkit-appearance: none;
+transition: all .15s ease;
+width: 100%; display: block; box-sizing: border-box;
+font-family: inherit; font-size: inherit;
+appearance: none; -webkit-appearance: none;
+-webkit-tap-highlight-color: transparent;
 }
-button.drop:active { background: rgba(255,184,77,.04); }
+button.drop {
+background: var(–panel-2) !important;
+color: var(–text) !important;
+}
+button.drop:active { background: rgba(255,184,77,.08) !important; }
+button.drop .big { color: var(–text); }
+button.drop .sub { color: var(–muted); }
 .drop.hover { border-color: var(–accent); background: rgba(255,184,77,.06); }
 .drop .icon { font-size: 36px; margin-bottom: 8px; }
 .drop .big { font-size: 17px; font-weight: 600; }

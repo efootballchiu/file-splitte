@@ -115,20 +115,30 @@ display: flex; align-items: center; gap: 12px;
 padding: 10px 0; cursor: pointer;
 }
 .toggle-btn {
-flex-shrink: 0; width: 46px; height: 28px;
+flex-shrink: 0; width: 50px; height: 30px;
 border-radius: 999px; background: #3a4252;
-border: none; position: relative; cursor: pointer;
+border: 2px solid #3a4252;
+position: relative; cursor: pointer;
 appearance: none; -webkit-appearance: none;
-padding: 0; transition: background 0.15s;
+padding: 0;
+display: inline-block;
 }
-.toggle-btn::after {
-content: “”; position: absolute; top: 3px; left: 3px;
-width: 22px; height: 22px; border-radius: 50%;
-background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-transition: transform 0.15s;
+.toggle-btn .knob {
+position: absolute;
+top: 2px; left: 2px;
+width: 22px; height: 22px;
+border-radius: 50%;
+background: #ffffff;
+box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
-.toggle-btn.on { background: var(–accent); }
-.toggle-btn.on::after { transform: translateX(18px); }
+.toggle-btn.on {
+background: #ffb84d;
+border-color: #ffb84d;
+}
+.toggle-btn.on .knob {
+left: auto;
+right: 2px;
+}
 .toggle-text { flex: 1; }
 .toggle-text .t { font-size: 14px; color: var(–text); }
 .toggle-text .s { font-size: 12px; color: var(–muted); margin-top: 2px; }
@@ -194,7 +204,7 @@ line-height: 1.5; margin-bottom: 12px;
 
 <header>
   <h1>檔案切割器</h1>
-  <p>切大檔案做 &lt; 30 MB 嘅碎片，方便上傳去 AI 工具。100% 喺你部機本地處理。</p>
+  <p>切大檔案做 &lt; 30 MB 嘅碎片，方便上傳去 AI 工具。預設每片 25 MB 留 buffer。100% 喺你部機本地處理。</p>
 </header>
 
 <div class="tabs">
@@ -218,19 +228,19 @@ line-height: 1.5; margin-bottom: 12px;
   <h2>2. 設定</h2>
   <div class="row-setting">
     <label>每片大細</label>
-    <input type="number" id="chunkMb" value="29.9" step="0.1" min="0.1" max="2048">
-    <span class="hint">MB · 預設 29.9 安全過 30 MB</span>
+    <input type="number" id="chunkMb" value="25" step="0.1" min="0.1" max="2048">
+    <span class="hint">MB · 預設 25，留足夠 buffer 安全過 30 MB</span>
   </div>
   <div class="toggle-row" id="toggle-auto">
-    <button type="button" class="toggle-btn on"></button>
+    <button type="button" class="toggle-btn on"><span class="knob"></span></button>
     <div class="toggle-text"><div class="t">揀完自動開始</div><div class="s">揀完即刻切，唔使㩒 button</div></div>
   </div>
   <div class="toggle-row" id="toggle-copy">
-    <button type="button" class="toggle-btn on"></button>
+    <button type="button" class="toggle-btn on"><span class="knob"></span></button>
     <div class="toggle-text"><div class="t">細檔案都包埋落結果</div><div class="s">細過 chunk size 嘅檔案直接 copy 到 zip</div></div>
   </div>
   <div class="toggle-row" id="toggle-hash">
-    <button type="button" class="toggle-btn on"></button>
+    <button type="button" class="toggle-btn on"><span class="knob"></span></button>
     <div class="toggle-text"><div class="t">計 SHA256 完整性</div><div class="s">合併後可驗證；超大檔案可關閉提速</div></div>
   </div>
 </div>
@@ -453,7 +463,7 @@ const $ = (id) => document.getElementById(id);
 const fmtSize = (n) => {
   if (n === 0) return "0 B";
   const u = ["B","KB","MB","GB","TB"]; let i=0, v=n;
-  while (v >= 1024 && i < u.length-1) { v /= 1024; i++; }
+  while (v >= 1000 && i < u.length-1) { v /= 1000; i++; }
   return v.toFixed(i===0 ? 0 : 2) + " " + u[i];
 };
 const sanitize = (s) => s.replace(/[<>:"/\\|?*\x00]/g, "_").replace(/^[\s.]+|[\s.]+$/g, "") || "file";
@@ -494,7 +504,7 @@ function iosDownload(blob, filename) {
 }
 
 async function splitFile(file, opts, onProgress) {
-  const chunkBytes = Math.max(1, Math.round(opts.chunkMb * 1024 * 1024));
+  const chunkBytes = Math.max(1, Math.round(opts.chunkMb * 1000 * 1000));
   const size = file.size;
   const result = { name: file.name, size, kind: "split", parts: [], packedBlob: null, manifest: null, error: null };
   try {
@@ -771,7 +781,7 @@ async function startSplit() {
   if (state.splitFiles.length === 0) return;
   $("startBtn").disabled = true; $("splitFileInput").disabled = true;
   const opts = {
-    chunkMb: parseFloat($("chunkMb").value) || 29.9,
+    chunkMb: parseFloat($("chunkMb").value) || 25,
     copySmall: state.toggles.copy, verifyHash: state.toggles.hash,
   };
   if (opts.chunkMb >= 30) {
